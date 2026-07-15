@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volunteers</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+:root{
+  --charcoal:#1c1f22;
+  --dark2:#2a2d31;
+  --steel:#8a9199;
+  --silver:#d1d5db;
+  --cream:#f4f1eb;
+  --white:#ffffff;
+  --accent:#d4af37;
+  --accent-dark:#b8952a;
+  --line:#e8e4de;
+  --nav-h:72px;
+  --nav-hover-bg:#f0ebe1;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#fff;font-family:'Barlow',sans-serif;overflow-x:hidden;padding-top:var(--nav-h)}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+
+
+/* ══════════════════════════════════════════
+   SECTION 1 — VOLUNTEER HERO BANNER
+══════════════════════════════════════════ */
+.vol-hero{
+  background:#fff;padding:90px 0 80px;text-align:center;
+  border-bottom:1px solid var(--line);position:relative;overflow:hidden;
+}
+.vol-hero::before{
+  content:'VOLUNTEER';
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(8rem,18vw,16rem);
+  color:rgba(212,175,55,.06);letter-spacing:10px;white-space:nowrap;pointer-events:none;
+  line-height:1;
+}
+.vol-hero-inner{max-width:820px;margin:0 auto;padding:0 40px;position:relative;z-index:1}
+.vol-eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:22px}
+.vol-eyebrow-line{width:28px;height:1.5px;background:var(--accent)}
+.vol-eyebrow span{font-family:'Barlow',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--accent)}
+.vol-hero h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3.2rem,7vw,6rem);
+  color:var(--charcoal);letter-spacing:2px;line-height:.95;
+  margin-bottom:26px;
+}
+.vol-hero h1 em{font-style:normal;color:var(--accent)}
+.vol-hero p{
+  font-family:'Crimson Pro',serif;font-size:1.2rem;line-height:1.8;
+  color:#666;max-width:600px;margin:0 auto 40px;
+}
+.vol-hero-buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* impact strip */
+.vol-impact{
+  display:flex;gap:0;margin-top:64px;
+  border:1px solid var(--line);border-radius:12px;overflow:hidden;
+}
+.vol-stat{
+  flex:1;padding:28px 24px;text-align:center;
+  border-right:1px solid var(--line);transition:background .3s;
+}
+.vol-stat:last-child{border-right:none}
+.vol-stat:hover{background:var(--cream)}
+.vol-stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:var(--accent);line-height:1;margin-bottom:6px}
+.vol-stat-label{font-family:'Barlow',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--steel)}
+
+/* ══════════════════════════════════════════
+   SECTION 2 — VOLUNTEER OPPORTUNITIES
+══════════════════════════════════════════ */
+.opportunities{background:#faf9f7;padding:90px 0}
+.opp-inner{max-width:1200px;margin:0 auto;padding:0 40px}
+.opp-header{text-align:center;margin-bottom:60px}
+.opp-header .eyebrow-label{font-family:'Barlow',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--steel);display:block;margin-bottom:12px}
+.opp-header h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,4vw,3.6rem);color:var(--charcoal);letter-spacing:1px;margin-bottom:14px;position:relative;display:inline-block}
+.opp-header h2::after{content:'';position:absolute;left:50%;bottom:-10px;transform:translateX(-50%);width:48px;height:3px;background:var(--accent);border-radius:2px}
+.opp-header p{font-family:'Crimson Pro',serif;font-size:1.1rem;color:#777;line-height:1.7;max-width:560px;margin:24px auto 0}
+
+/* opportunity cards grid */
+.opp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+
+.opp-card{
+  background:#fff;border:1px solid var(--line);border-radius:16px;
+  padding:36px 32px;display:flex;gap:24px;align-items:flex-start;
+  transition:transform .3s,box-shadow .3s,border-color .3s;
+  text-decoration:none;position:relative;overflow:hidden;
+}
+.opp-card::before{
+  content:'';position:absolute;top:0;left:0;width:4px;height:0;
+  background:var(--accent);transition:height .35s ease;border-radius:0 0 0 16px;
+}
+.opp-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.09);border-color:rgba(212,175,55,.3)}
+.opp-card:hover::before{height:100%}
+.opp-card.featured{
+  grid-column:span 2;
+  background:linear-gradient(135deg,var(--charcoal) 0%,var(--dark2) 100%);
+  border-color:transparent;
+}
+.opp-card.featured::before{background:var(--accent)}
+.opp-card.featured .opp-card-title{color:#fff}
+.opp-card.featured .opp-card-text{color:rgba(255,255,255,.6)}
+.opp-card.featured .opp-icon-wrap{background:rgba(212,175,55,.15);border-color:rgba(212,175,55,.25)}
+.opp-card.featured .opp-icon{color:var(--accent)}
+.opp-card.featured .opp-badge{background:rgba(212,175,55,.15);color:var(--accent)}
+
+.opp-icon-wrap{
+  width:52px;height:52px;border-radius:12px;
+  background:#f4f1eb;border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:background .3s;
+}
+.opp-card:not(.featured):hover .opp-icon-wrap{background:var(--cream)}
+.opp-icon{font-size:1.5rem;line-height:1}
+
+.opp-card-body{flex:1}
+.opp-badge{
+  display:inline-block;margin-bottom:10px;
+  padding:3px 10px;border-radius:20px;
+  background:#f4f1eb;color:var(--steel);
+  font-family:'Barlow',sans-serif;font-size:.67rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+}
+.opp-card-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--charcoal);letter-spacing:1.5px;margin-bottom:8px}
+.opp-card-text{font-family:'Crimson Pro',serif;font-size:1rem;color:#777;line-height:1.65}
+.opp-arrow{
+  margin-top:14px;display:inline-flex;align-items:center;gap:6px;
+  font-family:'Barlow',sans-serif;font-size:.72rem;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;color:var(--accent);
+  text-decoration:none;
+}
+.opp-arrow svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
+.opp-card:hover .opp-arrow svg{transform:translateX(4px)}
+
+/* benefits strip */
+.benefits-strip{
+  margin-top:52px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:36px 40px;
+}
+.benefits-strip h3{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--charcoal);letter-spacing:1px;margin-bottom:20px}
+.benefits-list{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.benefit-item{display:flex;align-items:flex-start;gap:12px;padding:16px;border-radius:10px;background:#faf9f7;border:1px solid var(--line)}
+.benefit-check{width:22px;height:22px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.benefit-check svg{width:11px;height:11px;stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.benefit-text{font-family:'Barlow',sans-serif;font-size:.85rem;color:#555;line-height:1.5}
+
+/* ══════════════════════════════════════════
+   SECTION 3 — ACTIVITIES + FORM
+══════════════════════════════════════════ */
+.action-section{background:#fff;padding:90px 0;border-top:1px solid var(--line)}
+.action-inner{max-width:1200px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+
+/* activities side */
+.activities h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,3.5vw,3.2rem);color:var(--charcoal);letter-spacing:1px;line-height:.95;margin-bottom:10px}
+.activities h2 span{color:var(--accent)}
+.activities .sub{font-family:'Crimson Pro',serif;font-size:1.05rem;color:#777;line-height:1.7;margin-bottom:36px}
+
+.activity-list{display:flex;flex-direction:column;gap:14px;margin-bottom:36px}
+.activity-item{
+  display:flex;align-items:center;gap:18px;
+  background:#faf9f7;border:1px solid var(--line);border-radius:12px;
+  padding:18px 20px;transition:border-color .3s,box-shadow .3s,transform .3s;cursor:default;
+}
+.activity-item:hover{border-color:rgba(212,175,55,.4);box-shadow:0 8px 24px rgba(0,0,0,.07);transform:translateX(6px)}
+.activity-icon{font-size:1.6rem;width:48px;text-align:center;flex-shrink:0}
+.activity-name{font-family:'Barlow',sans-serif;font-weight:700;font-size:.88rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--charcoal);margin-bottom:3px}
+.activity-desc{font-family:'Crimson Pro',serif;font-size:.97rem;color:#777;line-height:1.45}
+.activity-tag{
+  margin-left:auto;flex-shrink:0;
+  padding:4px 10px;border-radius:20px;
+  background:rgba(212,175,55,.1);color:var(--accent-dark);
+  font-family:'Barlow',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+}
+
+/* form side */
+.vol-form-wrap{
+  background:#faf9f7;border:1px solid var(--line);border-radius:20px;
+  padding:44px 40px;position:sticky;top:calc(var(--nav-h) + 24px);
+}
+.form-eyebrow{font-family:'Barlow',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:10px}
+.vol-form-wrap h3{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--charcoal);letter-spacing:1.5px;margin-bottom:6px}
+.vol-form-wrap .form-sub{font-family:'Crimson Pro',serif;font-size:1rem;color:#888;line-height:1.6;margin-bottom:28px}
+
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.form-group label{font-family:'Barlow',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--steel)}
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width:100%;padding:13px 16px;
+  background:#fff;border:1px solid var(--line);border-radius:8px;
+  font-family:'Barlow',sans-serif;font-size:.9rem;color:var(--charcoal);
+  outline:none;transition:border-color .2s,box-shadow .2s;resize:vertical;
+  appearance:none;-webkit-appearance:none;
+}
+.form-group select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpolyline points='1 1 6 7 11 1' stroke='%238a9199' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;cursor:pointer;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(212,175,55,.12)}
+.form-group input::placeholder,
+.form-group textarea::placeholder{color:#bbb}
+
+/* checkbox group */
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px}
+.check-label{display:flex;align-items:center;gap:9px;cursor:pointer;padding:10px 12px;border-radius:8px;border:1px solid var(--line);background:#fff;transition:border-color .2s,background .2s}
+.check-label:hover{border-color:rgba(212,175,55,.4);background:rgba(212,175,55,.04)}
+.check-label input[type="checkbox"]{width:16px;height:16px;accent-color:var(--accent);flex-shrink:0}
+.check-label span{font-family:'Barlow',sans-serif;font-size:.8rem;color:#555;line-height:1.2}
+
+.form-submit{
+  width:100%;padding:17px;
+  background:var(--accent);color:var(--charcoal);
+  font-family:'Barlow',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  border:2px solid var(--accent);border-radius:8px;cursor:pointer;
+  transition:background .25s,color .25s,border-color .25s,transform .2s,box-shadow .2s;
+  margin-top:4px;
+}
+.form-submit:hover{background:var(--accent-dark);border-color:var(--accent-dark);color:#fff;transform:translateY(-2px);box-shadow:0 8px 24px rgba(212,175,55,.4)}
+.form-note{text-align:center;font-family:'Barlow',sans-serif;font-size:.72rem;color:#bbb;margin-top:12px;letter-spacing:.5px}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media(max-width:1024px){
+  .action-inner{grid-template-columns:1fr;gap:48px}
+  .vol-form-wrap{position:static}
+}
+@media(max-width:860px){
+  .opp-grid{grid-template-columns:1fr}
+  .opp-card.featured{grid-column:span 1}
+  .benefits-list{grid-template-columns:1fr 1fr}
+  .vol-impact{flex-direction:column}
+  .vol-stat{border-right:none;border-bottom:1px solid var(--line)}
+  .vol-stat:last-child{border-bottom:none}
+}
+@media(max-width:640px){
+  .vol-hero,.opportunities,.action-section{padding:64px 0}
+  .vol-hero-inner,.opp-inner,.action-inner{padding:0 24px}
+  .vol-form-wrap{padding:32px 24px}
+  .form-row{grid-template-columns:1fr}
+  .benefits-list{grid-template-columns:1fr}
+  .check-grid{grid-template-columns:1fr}
+  .opp-card{flex-direction:column;gap:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     HEADER
+═══════════════════════════════════════ -->
+<header class="n-bar" id="nBar">
+  <div style="display:flex;align-items:center;width:100%;gap:0">
+    <div class="n-logo-icon">
+      <img src="images/logo.png" alt="Mtaazillas Logo" class="logo-img">
+    </div>
+    <nav aria-label="Primary">
+      <ul class="n-links">
+        <li><a href="index.html">Home</a></li>
+
+        <li class="n-drop">
+          <a href="Our-story.html">Who We Are <span class="n-caret">▾</span></a>
+          <ul class="n-drop-menu">
+            <li><a href="team.html">Team</a></li>
+            <li><a href="#">Partners</a></li>
+            <li><a href="Our-story.html">History</a></li>
+          </ul>
+        </li>
+
+        <li class="n-drop">
+          <a href="index.html#what-we-do">What We Do <span class="n-caret">▾</span></a>
+          <ul class="n-drop-menu">
+            <li><a href="waste-to-value.html">Waste to Value</a></li>
+            <li><a href="street-sanitization.html">Street Sanitization</a></li>
+          </ul>
+        </li>
+
+        <li><a href="volunteer.html" class="active">Volunteer</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="donate.html" class="n-donate">♡ &nbsp;Donate</a>
+    <button class="n-burger" id="nBurger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════
+     MOBILE FULL-SCREEN OVERLAY
+═══════════════════════════════════════ -->
+<div class="n-overlay" id="nOverlay">
+  <div class="n-ov-top">
+    <img src="images/logo.png" alt="Mtaazillas Logo" class="n-ov-logo">
+    <button class="n-ov-close" id="nOvClose" aria-label="Close menu">✕</button>
+  </div>
+
+  <ul class="n-ov-nav">
+    <li><a href="index.html">Home</a></li>
+
+    <li class="n-ov-drop">
+      <a href="#" class="n-ov-toggle">Who We Are <span class="n-caret">▾</span></a>
+      <ul class="n-ov-submenu">
+        <li><a href="team.html">Team</a></li>
+        <li><a href="#">Partners</a></li>
+        <li><a href="Our-story.html">History</a></li>
+      </ul>
+    </li>
+
+    <li class="n-ov-drop">
+      <a href="#" class="n-ov-toggle">What We Do <span class="n-caret">▾</span></a>
+      <ul class="n-ov-submenu">
+        <li><a href="waste-to-value.html">Waste to Value</a></li>
+        <li><a href="street-sanitization.html">Street Sanitization</a></li>
+      </ul>
+    </li>
+
+    <li><a href="volunteer.html" class="active">Volunteer</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+
+  <div class="n-ov-bottom">
+    <a href="donate.html" class="n-ov-donate">♡ &nbsp;Donate</a>
+  </div>
+</div>
+
+<!-- MOBILE OVERLAY -->
+<div class="n-overlay" id="nOverlay" aria-hidden="true">
+  <div class="n-ov-top">
+    <span class="n-ov-logo-name">Mtaazillas</span>
+    <button class="n-ov-close" id="nClose" aria-label="Close menu">✕</button>
+  </div>
+  <ul class="n-ov-nav">
+    <li><a href="#" onclick="closeNav()">Who We Are</a></li>
+    <li><a href="#" onclick="closeNav()">What We Do</a></li>
+    <li><a href="volunteer.html" class="active" onclick="closeNav()">Volunteer</a></li>
+    <li><a href="contact.html" onclick="closeNav()">Contact</a></li>
+  </ul>
+  <div class="n-ov-bottom">
+    <a href="donate.html" class="n-ov-donate" onclick="closeNav()">♡ &nbsp;Donate Now</a>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     SECTION 1 — VOLUNTEER WITH MTAAZILLAS
+═══════════════════════════════════════ -->
+<section class="vol-hero" id="volunteer-hero">
+  <div class="vol-hero-inner">
+    <div class="vol-eyebrow reveal">
+      <div class="vol-eyebrow-line"></div>
+      <span>Get Involved</span>
+      <div class="vol-eyebrow-line"></div>
+    </div>
+
+    <h1 class="reveal">Volunteer with<br><em>Mtaazillas.</em></h1>
+
+    <p class="reveal">You don't need experience. You don't need to know anyone. Show up, contribute your time, and help build a cleaner, more connected Nairobi — one cleanup, one community at a time.</p>
+
+    <div class="vol-hero-buttons reveal">
+      <a href="#sign-up" class="n-donate" style="border-radius:50px;padding:15px 36px">Sign Up Now</a>
+      <a href="#opportunities" style="display:inline-flex;align-items:center;gap:8px;padding:15px 32px;border:1.5px solid var(--line);border-radius:50px;font-family:'Barlow',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--charcoal);text-decoration:none;transition:border-color .25s,background .25s">
+        See Opportunities
+      </a>
+    </div>
+
+    <div class="vol-impact reveal">
+      <div class="vol-stat">
+        <div class="vol-stat-num">0</div>
+        <div class="vol-stat-label">Volunteers Mobilised</div>
+      </div>
+      <div class="vol-stat">
+        <div class="vol-stat-num">0</div>
+        <div class="vol-stat-label">Waste Cleared</div>
+      </div>
+      <div class="vol-stat">
+        <div class="vol-stat-num">1</div>
+        <div class="vol-stat-label">Programs Run</div>
+      </div>
+      <div class="vol-stat">
+        <div class="vol-stat-num">Since</div>
+        <div class="vol-stat-label">2026 · Nairobi</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SECTION 2 — VOLUNTEER OPPORTUNITIES
+═══════════════════════════════════════ -->
+<section class="opportunities" id="opportunities">
+  <div class="opp-inner">
+    <div class="opp-header reveal">
+      <span class="eyebrow-label">Volunteer Roles</span>
+      <h2>Find Your Role</h2>
+      <p>No two volunteers are the same — find the spot where your energy fits best. Every role directly shapes the communities we serve.</p>
+    </div>
+
+    <div class="opp-grid reveal">
+
+      <!-- Featured -->
+      <div class="opp-card featured">
+        <div class="opp-icon-wrap"><div class="opp-icon">🧹</div></div>
+        <div class="opp-card-body">
+          <span class="opp-badge">Most Active</span>
+          <div class="opp-card-title">Cleanup Crew</div>
+          <p class="opp-card-text">The backbone of every Mtaazillas event. Join our boots-on-the-ground team for street, river, and estate cleanups across Nairobi. Get your hands dirty, meet amazing people, and see your work in real time.</p>
+          <a href="#sign-up" class="opp-arrow">Apply now
+            <svg viewBox="0 0 14 10"><polyline points="9 1 13 5 9 9"/><line x1="1" y1="5" x2="13" y2="5"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Regular cards -->
+      <div class="opp-card">
+        <div class="opp-icon-wrap"><div class="opp-icon">♻️</div></div>
+        <div class="opp-card-body">
+          <span class="opp-badge">Programme</span>
+          <div class="opp-card-title">Waste to Value</div>
+          <p class="opp-card-text">Help transform collected waste into usable products and income for youth. Work with upcycling teams, sorting hubs, and market linkages.</p>
+          <a href="#sign-up" class="opp-arrow">Apply now
+            <svg viewBox="0 0 14 10"><polyline points="9 1 13 5 9 9"/><line x1="1" y1="5" x2="13" y2="5"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-icon-wrap"><div class="opp-icon">🎓</div></div>
+        <div class="opp-card-body">
+          <span class="opp-badge">Mentorship</span>
+          <div class="opp-card-title">Youth Trainer</div>
+          <p class="opp-card-text">Share your skills — trades, tech, art, business — with young people through our workshops and skills-building programs.</p>
+          <a href="#sign-up" class="opp-arrow">Apply now
+            <svg viewBox="0 0 14 10"><polyline points="9 1 13 5 9 9"/><line x1="1" y1="5" x2="13" y2="5"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-icon-wrap"><div class="opp-icon">🏥</div></div>
+        <div class="opp-card-body">
+          <span class="opp-badge">Health</span>
+          <div class="opp-card-title">Health Drive Support</div>
+          <p class="opp-card-text">Support health awareness campaigns and screenings, helping bring vital services to neighbourhoods that need them most.</p>
+          <a href="#sign-up" class="opp-arrow">Apply now
+            <svg viewBox="0 0 14 10"><polyline points="9 1 13 5 9 9"/><line x1="1" y1="5" x2="13" y2="5"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-icon-wrap"><div class="opp-icon">📢</div></div>
+        <div class="opp-card-body">
+          <span class="opp-badge">Digital</span>
+          <div class="opp-card-title">Digital Advocate</div>
+          <p class="opp-card-text">Spread the word online — social media, photography, content creation, blogging. Bring the Mtaazillas story to the world.</p>
+          <a href="#sign-up" class="opp-arrow">Apply now
+            <svg viewBox="0 0 14 10"><polyline points="9 1 13 5 9 9"/><line x1="1" y1="5" x2="13" y2="5"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Benefits -->
+    <div class="benefits-strip reveal">
+      <h3>What You Get as a Volunteer</h3>
+      <div class="benefits-list">
+        <div class="benefit-item">
+          <div class="benefit-check"><svg viewBox="0 0 12 10"><polyline points="1 5 4.5 8.5 11 1"/></svg></div>
+          <div class="benefit-text">A front-row seat to real community change in Nairobi</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-check"><svg viewBox="0 0 12 10"><polyline points="1 5 4.5 8.5 11 1"/></svg></div>
+          <div class="benefit-text">Shared meals, new friends, and lasting connections</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-check"><svg viewBox="0 0 12 10"><polyline points="1 5 4.5 8.5 11 1"/></svg></div>
+          <div class="benefit-text">Creative freedom to help shape each experience</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-check"><svg viewBox="0 0 12 10"><polyline points="1 5 4.5 8.5 11 1"/></svg></div>
+          <div class="benefit-text">Official volunteer certificate for your portfolio</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-check"><svg viewBox="0 0 12 10"><polyline points="1 5 4.5 8.5 11 1"/></svg></div>
+          <div class="benefit-text">Skills training and mentorship opportunities</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-check"><svg viewBox="0 0 12 10"><polyline points="1 5 4.5 8.5 11 1"/></svg></div>
+          <div class="benefit-text">Grow at your own pace — we guide, not pressure</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     SECTION 3 — ACTIVITIES + SIGN-UP FORM
+═══════════════════════════════════════ -->
+<section class="action-section" id="sign-up">
+  <div class="action-inner">
+
+    <!-- LEFT: activities -->
+    <div class="activities reveal">
+      <h2>What We <span>Actually Do</span><br>on the Ground.</h2>
+      <p class="sub">Every Mtaazillas activity is hands-on and community-led. Here's what you'll be part of when you volunteer with us.</p>
+
+      <div class="activity-list">
+
+        <div class="activity-item">
+          <div class="activity-icon">🧹</div>
+          <div class="activity-content">
+            <div class="activity-name">Street &amp; Estate Cleanups</div>
+            <div class="activity-desc">Regular organised drives that transform the look and feel of Nairobi's estates — tools, gloves, and energy provided.</div>
+          </div>
+          <span class="activity-tag">Weekly</span>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-icon">♻️</div>
+          <div class="activity-content">
+            <div class="activity-name">Waste to Value Workshops</div>
+            <div class="activity-desc">Turn collected waste into furniture, bags, and art — creating income and pride for local youth artisans.</div>
+          </div>
+          <span class="activity-tag">Programme</span>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-icon">🌿</div>
+          <div class="activity-content">
+            <div class="activity-name">Environmental Conservation</div>
+            <div class="activity-desc">Tree planting, river clean-ups, and protecting Nairobi's green spaces for future generations.</div>
+          </div>
+          <span class="activity-tag">Monthly</span>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-icon">🏥</div>
+          <div class="activity-content">
+            <div class="activity-name">Community Health Drives</div>
+            <div class="activity-desc">Health awareness, screenings, and education in under-served estates across Nairobi.</div>
+          </div>
+          <span class="activity-tag">Programme</span>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-icon">✊</div>
+          <div class="activity-content">
+            <div class="activity-name">Youth Skills &amp; Mentorship</div>
+            <div class="activity-desc">Workshops, trade training, and platforms that help young people lead rather than follow.</div>
+          </div>
+          <span class="activity-tag">Programme</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: form -->
+    <div class="vol-form-wrap reveal" id="volunteer-form">
+      <span class="form-eyebrow">Join Us Today</span>
+      <h3>Sign Up to Volunteer</h3>
+      <p class="form-sub">Fill in your details and we'll match you to the right opportunity. No experience needed.</p>
+
+      <form action="#" method="POST" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="fname" placeholder="Jane" required>
+          </div>
+          <div class="form-group">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lname" placeholder="Mwangi" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="jane@email.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone / WhatsApp</label>
+          <input type="tel" id="phone" name="phone" placeholder="+254 7XX XXX XXX">
+        </div>
+
+        <div class="form-group">
+          <label for="location">Your Estate / Area</label>
+          <input type="text" id="location" name="location" placeholder="e.g. Githurai, Kayole, Westlands…">
+        </div>
+
+        <div class="form-group">
+          <label for="availability">Availability</label>
+          <select id="availability" name="availability">
+            <option value="" disabled selected>When can you volunteer?</option>
+            <option>Weekdays only</option>
+            <option>Weekends only</option>
+            <option>Both weekdays &amp; weekends</option>
+            <option>Flexible / Remote only</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label style="margin-bottom:10px;display:block">Activities I'm Interested In</label>
+          <div class="check-grid">
+            <label class="check-label">
+              <input type="checkbox" name="activities" value="cleanups">
+              <span>Street Cleanups</span>
+            </label>
+            <label class="check-label">
+              <input type="checkbox" name="activities" value="waste">
+              <span>Waste to Value</span>
+            </label>
+            <label class="check-label">
+              <input type="checkbox" name="activities" value="environment">
+              <span>Environment</span>
+            </label>
+            <label class="check-label">
+              <input type="checkbox" name="activities" value="health">
+              <span>Health Drives</span>
+            </label>
+            <label class="check-label">
+              <input type="checkbox" name="activities" value="youth">
+              <span>Youth Training</span>
+            </label>
+            <label class="check-label">
+              <input type="checkbox" name="activities" value="digital">
+              <span>Digital / Content</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Anything else you'd like us to know?</label>
+          <textarea id="message" name="message" rows="3" placeholder="Your skills, motivation, questions…"></textarea>
+        </div>
+
+        <button type="submit" class="form-submit">Submit My Application →</button>
+        <p class="form-note">We'll be in touch within 48 hours. No spam, ever.</p>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════ -->
+<script>
+;
+
+/* ── REVEAL ── */
+const ro = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if(e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 70);
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+/* ── FORM SUBMIT ── */
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = '✓ Application Sent!';
+  btn.style.background = '#2a7a4a';
+  btn.style.borderColor = '#2a7a4a';
+  btn.style.color = '#fff';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = 'Submit My Application →';
+    btn.style = '';
+    btn.disabled = false;
+    e.target.reset();
+  }, 4000);
+}
+</script>
+
+<script src="js/nav.js"></script>
+</body>
+</html>

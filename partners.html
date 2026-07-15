@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Mtaazillas partners with organizations like Kenya Red Cross, NEMA, and local health clinics to amplify impact across Nairobi's communities.">
+<title>Our Partners</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  /* ===== CORE STYLES (IDENTICAL TO OTHER PAGES) ===== */
+  :root { --charcoal:#1C1C1E; --steel:#8A9199; --silver:#B0B8BF; --cream:#F5F0E8; --blush:#D6C9BC; --warm:#C4B8AA; --dark2:#2A2A2C; --accent:#9BA8B0; }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--cream); color: var(--charcoal); font-family: 'Barlow', sans-serif; overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
+
+
+  /* Shared Text */
+  .section-tag { font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; color: var(--steel); margin-bottom: 14px; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.4rem, 4.5vw, 4.2rem); line-height: 0.95; color: var(--charcoal); }
+  .section-title.light { color: var(--cream); }
+  .section-body { font-family: 'Crimson Pro', serif; font-size: 1.08rem; line-height: 1.82; color: #666; }
+  .section-body.light { color: var(--blush); }
+  .inner-container { max-width: 1300px; margin: 0 auto; padding: 0 60px; width: 100%; }
+  .btn-light { display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--cream); color: var(--cream); padding: 13px 26px; font-size: 0.73rem; letter-spacing: 2.5px; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
+  .btn-light:hover { background: var(--cream); color: var(--charcoal); }
+
+  /* ===== PARTNERS HERO ===== */
+  .page-hero { min-height: 55vh; padding-top: 72px; background: linear-gradient(135deg, rgba(28,28,30,0.85) 0%, rgba(28,28,30,0.4) 100%), url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&q=80') center/cover; display: flex; align-items: center; text-align: center; justify-content: center; }
+  .page-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 8vw, 6rem); color: var(--cream); margin-bottom: 16px; }
+  .page-hero p { font-family: 'Crimson Pro', serif; font-size: 1.15rem; color: var(--silver); max-width: 600px; margin: 0 auto; font-style: italic; }
+
+  /* ===== PARTNERS GRID ===== */
+  .partners-section { padding: 100px 0; background: var(--cream); }
+  .partner-category { margin-bottom: 80px; }
+  .partner-category-title { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--charcoal); margin-bottom: 30px; border-bottom: 2px solid var(--dark2); padding-bottom: 10px; display: inline-block; }
+  .partner-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+  .partner-card { background: #fff; border: 1px solid rgba(138,145,153,0.2); padding: 40px 30px; text-align: center; transition: transform 0.3s, box-shadow 0.3s; }
+  .partner-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
+  .partner-logo-placeholder { width: 80px; height: 80px; background: var(--charcoal); color: var(--cream); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 2rem; margin: 0 auto 20px; }
+  .partner-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--charcoal); margin-bottom: 10px; letter-spacing: 1px; }
+  .partner-desc { font-size: 0.85rem; color: #666; line-height: 1.6; }
+
+  /* ===== PARTNERSHIP CTA ===== */
+  .partner-cta { background: var(--charcoal); padding: 80px 0; text-align: center; }
+
+  /* Footer */
+  footer { background: #111113; padding: 60px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-top: auto; }
+  .footer-brand p { font-size: 0.82rem; color: var(--steel); line-height: 1.7; max-width: 280px; margin-top: 12px; }
+  .footer-col h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; color: var(--cream); letter-spacing: 2px; margin-bottom: 18px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul a { font-size: 0.82rem; color: var(--steel); text-decoration: none; transition: color 0.3s; }
+  .footer-col ul a:hover { color: var(--cream); }
+  .footer-bottom { background: #111113; border-top: 1px solid rgba(138,145,153,0.15); padding: 20px 60px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-bottom p { font-size: 0.73rem; color: #555; }
+
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 900px) {
+
+    .inner-container { padding: 0 24px; }
+    .partner-grid { grid-template-columns: 1fr; }
+    .partners-section, .partner-cta { padding: 60px 0; }
+    footer { grid-template-columns: 1fr; padding: 40px 24px; gap: 36px; }
+    .footer-bottom { flex-direction: column; gap: 8px; padding: 20px 24px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+<!-- ═══════════════════════════════════════
+     HEADER
+═══════════════════════════════════════ -->
+<header class="n-bar" id="nBar">
+  <div style="display:flex;align-items:center;width:100%;gap:0">
+    <div class="n-logo-icon">
+      <img src="images/logo.png" alt="Mtaazillas Logo" class="logo-img">
+    </div>
+    <nav aria-label="Primary">
+      <ul class="n-links">
+        <li><a href="index.html">Home</a></li>
+
+        <li class="n-drop">
+          <a href="Our-story.html">Who We Are <span class="n-caret">▾</span></a>
+          <ul class="n-drop-menu">
+            <li><a href="team.html">Team</a></li>
+            <li><a href="#">Partners</a></li>
+            <li><a href="Our-story.html">History</a></li>
+          </ul>
+        </li>
+
+        <li class="n-drop">
+          <a href="index.html#what-we-do">What We Do <span class="n-caret">▾</span></a>
+          <ul class="n-drop-menu">
+            <li><a href="waste-to-value.html">Waste to Value</a></li>
+            <li><a href="street-sanitization.html">Street Sanitization</a></li>
+          </ul>
+        </li>
+
+        <li><a href="volunteer.html" class="active">Volunteer</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="donate.html" class="n-donate">♡ &nbsp;Donate</a>
+    <button class="n-burger" id="nBurger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════
+     MOBILE FULL-SCREEN OVERLAY
+═══════════════════════════════════════ -->
+<div class="n-overlay" id="nOverlay">
+  <div class="n-ov-top">
+    <img src="images/logo.png" alt="Mtaazillas Logo" class="n-ov-logo">
+    <button class="n-ov-close" id="nOvClose" aria-label="Close menu">✕</button>
+  </div>
+
+  <ul class="n-ov-nav">
+    <li><a href="index.html">Home</a></li>
+
+    <li class="n-ov-drop">
+      <a href="#" class="n-ov-toggle">Who We Are <span class="n-caret">▾</span></a>
+      <ul class="n-ov-submenu">
+        <li><a href="team.html">Team</a></li>
+        <li><a href="#">Partners</a></li>
+        <li><a href="Our-story.html">History</a></li>
+      </ul>
+    </li>
+
+    <li class="n-ov-drop">
+      <a href="#" class="n-ov-toggle">What We Do <span class="n-caret">▾</span></a>
+      <ul class="n-ov-submenu">
+        <li><a href="waste-to-value.html">Waste to Value</a></li>
+        <li><a href="street-sanitization.html">Street Sanitization</a></li>
+      </ul>
+    </li>
+
+    <li><a href="volunteer.html" class="active">Volunteer</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+
+  <div class="n-ov-bottom">
+    <a href="donate.html" class="n-ov-donate">♡ &nbsp;Donate</a>
+  </div>
+</div>
+
+<header class="page-hero">
+  <div class="inner-container reveal">
+    <p class="section-tag" style="color:var(--steel)">Our Network</p>
+    <h1>Our Partners</h1>
+    <p>Impact is never a solo effort. Meet the organizations, businesses, and civic bodies that amplify our work across Nairobi.</p>
+  </div>
+</header>
+
+<section class="partners-section">
+  <div class="inner-container">
+    
+    <!-- Category 1 -->
+    <div class="partner-category reveal">
+      <h2 class="partner-category-title">Health & Medical Partners</h2>
+      <div class="partner-grid">
+        <div class="partner-card">
+          <div class="partner-logo-placeholder" style="background:#8A9199">KRC</div>
+          <h3 class="partner-name">Kenya Red Cross</h3>
+          <p class="partner-desc">Provides emergency response training, first aid certification, and medical personnel for our quarterly free health camps.</p>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo-placeholder" style="background:#D6C9BC; color:#1C1C1E;">NHC</div>
+          <h3 class="partner-name">Nairobi Health Clinics</h3>
+          <p class="partner-desc">A coalition of local dispensaries that offer subsidized follow-up treatments for patients identified during our community screenings.</p>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo-placeholder" style="background:#2A2A2C">AMF</div>
+          <h3 class="partner-name">Afya Mtaani Foundation</h3>
+          <p class="partner-desc">Partners with our youth advocates to deliver reproductive health education and distribute sanitary products in schools.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category 2 -->
+    <div class="partner-category reveal">
+      <h2 class="partner-category-title">Environmental & Sanitation</h2>
+      <div class="partner-grid">
+        <div class="partner-card">
+          <div class="partner-logo-placeholder" style="background:#1C1C1E">NEMA</div>
+          <h3 class="partner-name">NEMA Kenya</h3>
+          <p class="partner-desc">Provides regulatory guidance, seedlings for urban greening, and waste disposal logistics for massive river cleanups.</p>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo-placeholder" style="background:#B0B8BF; color:#1C1C1E;">GWC</div>
+          <h3 class="partner-name">Green Waste Collective</h3>
+          <p class="partner-desc">Purchases the sorted recyclable plastics collected by our youth, converting our sanitation efforts into a direct economic stream.</p>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo-placeholder" style="background:#C4B8AA; color:#1C1C1E;">TFK</div>
+          <h3 class="partner-name">Trees For Kenya</h3>
+          <p class="partner-desc">Co-sponsors our "One Youth, One Tree" initiative, providing indigenous seedlings and environmental maintenance training.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="partner-cta">
+  <div class="inner-container reveal">
+    <h2 class="section-title light" style="margin-bottom:20px;">Become A Partner</h2>
+    <p class="section-body light" style="max-width:500px; margin:0 auto 30px;">We are actively looking for corporate sponsors, NGOs, and local businesses who want to invest in the future of Nairobi's youth.</p>
+    <a href="contact.html" class="btn-light">Let's Work Together →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">
+    <p style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--cream);letter-spacing:3px;">MTAAZILLAS</p>
+    <p>A youth movement from Nairobi, fighting for cleaner streets, healthier communities, and a generation empowered to lead.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Navigate</h4>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="our-story.html">Our Story</a></li>
+      <li><a href="index.html#what-we-do">What We Do</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Our Work</h4>
+    <ul>
+      <li><a href="#">Environment</a></li>
+      <li><a href="#">Health</a></li>
+      <li><a href="#">Sanitation</a></li>
+      <li><a href="#">Youth</a></li>
+      <li><a href="#">Waste to Value</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Connect</h4>
+    <ul>
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">Twitter / X</a></li>
+      <li><a href="#">Facebook</a></li>
+      <li><a href="#">WhatsApp</a></li>
+      <li><a href="mailto:info@mtaazillas.org">info@mtaazillas.org</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2025 Mtaazillas. All rights reserved.</p>
+  <p>Nairobi, Kenya</p>
+</div>
+
+|<script src="java.js"></script>
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => { entries.forEach((e,i) => { if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'), i*80); }); }, { threshold: 0.08 });
+  reveals.forEach(el => obs.observe(el));
+  
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const navContent = document.getElementById('navContent');
+  const navLinks = document.querySelectorAll('.nav-content a');
+  hamburgerBtn.addEventListener('click', () => {
+    hamburgerBtn.classList.toggle('active'); navContent.classList.toggle('open');
+    document.body.style.overflow = navContent.classList.contains('open') ? 'hidden' : '';
+  });
+  navLinks.forEach(link => { link.addEventListener('click', () => { hamburgerBtn.classList.remove('active'); navContent.classList.remove('open'); document.body.style.overflow = ''; }); });
+</script>
+
+<script src="js/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Support Mtaazillas by donating to youth empowerment, community health, sanitation, environment, or waste-to-value programs in Nairobi.">
+<title>Donate | Mtaazillas CBO</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #ffffff;
+    --light: #f7f7f5;
+    --border: #e8e8e4;
+    --mid: #777;
+    --paypal: #003087;
+    --paypal-gold: #009cde;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--light); color: var(--black); font-family: 'Barlow', sans-serif; min-height: 100vh; }
+
+ 
+  /* ===== MAIN WRAPPER ===== */
+  .page {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+    padding: 140px 24px 80px;
+  }
+
+  /* ===== TOP HEADING ===== */
+  .page-heading { text-align: center; margin-bottom: 56px; }
+  .page-heading h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    letter-spacing: 2px; line-height: 1;
+    margin-bottom: 16px;
+  }
+  .page-heading p { font-size: 1rem; color: var(--mid); font-weight: 300; max-width: 420px; line-height: 1.75; }
+
+  /* ===== DONATE CARD ===== */
+  .donate-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    width: 100%; max-width: 520px;
+    padding: 48px;
+  }
+
+  /* Step labels */
+  .step-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--mid); margin-bottom: 16px;
+  }
+
+  /* Cause selector */
+  .cause-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 36px; }
+  .cause-btn {
+    border: 1px solid var(--border); background: #fff;
+    padding: 16px 12px; cursor: pointer;
+    font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 1px; color: var(--mid);
+    transition: all 0.2s ease; text-align: center;
+    position: relative;
+  }
+  .cause-btn:hover { border-color: var(--black); color: var(--black); }
+  .cause-btn.active { border-color: var(--black); color: var(--black); background: var(--black); color: #fff; }
+  .cause-btn.active::after {
+    content: '✓'; position: absolute; top: 6px; right: 8px;
+    font-size: 10px; color: rgba(255,255,255,0.6);
+  }
+
+  /* Divider */
+  .divider { height: 1px; background: var(--border); margin: 0 0 36px 0; }
+
+  /* Amount selector */
+  .amount-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }
+  .amount-btn {
+    border: 1px solid var(--border); background: #fff;
+    padding: 14px 8px; cursor: pointer;
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 1px;
+    color: var(--mid); transition: all 0.2s ease; text-align: center;
+  }
+  .amount-btn:hover { border-color: var(--black); color: var(--black); }
+  .amount-btn.active { border-color: var(--black); background: var(--black); color: #fff; }
+
+  /* Custom amount */
+  .custom-amount-wrap { position: relative; margin-bottom: 36px; }
+  .custom-amount-wrap .currency {
+    position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+    font-size: 14px; font-weight: 600; color: var(--mid);
+  }
+  .custom-input {
+    width: 100%; border: 1px solid var(--border); background: #fff;
+    padding: 15px 16px 15px 36px;
+    font-family: 'Barlow', sans-serif; font-size: 15px; color: var(--black);
+    outline: none; transition: border-color 0.2s;
+    appearance: none;
+  }
+  .custom-input::placeholder { color: #bbb; }
+  .custom-input:focus { border-color: var(--black); }
+
+  /* PayPal button */
+  .paypal-btn {
+    width: 100%; padding: 18px;
+    background: #0070ba; color: #fff;
+    border: none; cursor: pointer;
+    font-family: 'Barlow', sans-serif; font-size: 15px; font-weight: 600;
+    letter-spacing: 0.5px;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    transition: background 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+  }
+  .paypal-btn:hover { background: #005ea6; transform: translateY(-2px); }
+  .paypal-btn:active { transform: translateY(0); }
+  .paypal-logo { height: 20px; }
+
+  /* Trust note */
+  .trust-note {
+    text-align: center; margin-top: 20px;
+    font-size: 12px; color: #aaa; font-weight: 300; line-height: 1.6;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .trust-note .lock { font-size: 13px; }
+
+  /* Selected summary */
+  .summary {
+    margin-top: 36px; padding: 20px;
+    background: var(--light); border-left: 3px solid var(--black);
+    font-size: 13px; color: var(--mid); line-height: 1.8;
+    display: none;
+  }
+  .summary.visible { display: block; }
+  .summary strong { color: var(--black); font-weight: 600; }
+
+  /* ===== FOOTER ===== */
+  .page-footer {
+    text-align: center; margin-top: 60px;
+    font-size: 12px; color: #bbb; line-height: 1.8;
+  }
+  .page-footer a { color: #bbb; text-decoration: none; border-bottom: 1px solid #e0e0e0; }
+  .page-footer a:hover { color: var(--mid); }
+
+  /* ===== MOBILE ===== */
+  @media(max-width: 600px) {
+    .site-header { padding: 16px 20px; }
+    .page { padding: 110px 16px 60px; }
+    .donate-card { padding: 32px 24px; }
+    .cause-grid { grid-template-columns: 1fr 1fr; }
+    .amount-grid { grid-template-columns: repeat(3,1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     HEADER
+═══════════════════════════════════════ -->
+<header class="n-bar" id="nBar">
+  <div style="display:flex;align-items:center;width:100%;gap:0">
+    <div class="n-logo-icon">
+      <img src="images/logo.png" alt="Mtaazillas Logo" class="logo-img">
+    </div>
+    <nav aria-label="Primary">
+      <ul class="n-links">
+        <li><a href="index.html">Home</a></li>
+
+        <li class="n-drop">
+          <a href="Our-story.html">Who We Are <span class="n-caret">▾</span></a>
+          <ul class="n-drop-menu">
+            <li><a href="team.html">Team</a></li>
+            <li><a href="#">Partners</a></li>
+            <li><a href="Our-story.html">History</a></li>
+          </ul>
+        </li>
+
+        <li class="n-drop">
+          <a href="index.html#what-we-do">What We Do <span class="n-caret">▾</span></a>
+          <ul class="n-drop-menu">
+            <li><a href="waste-to-value.html">Waste to Value</a></li>
+            <li><a href="street-sanitization.html">Street Sanitization</a></li>
+          </ul>
+        </li>
+
+        <li><a href="volunteer.html" class="active">Volunteer</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="donate.html" class="n-donate">♡ &nbsp;Donate</a>
+    <button class="n-burger" id="nBurger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════
+     MOBILE FULL-SCREEN OVERLAY
+═══════════════════════════════════════ -->
+<div class="n-overlay" id="nOverlay">
+  <div class="n-ov-top">
+    <img src="images/logo.png" alt="Mtaazillas Logo" class="n-ov-logo">
+    <button class="n-ov-close" id="nOvClose" aria-label="Close menu">✕</button>
+  </div>
+
+  <ul class="n-ov-nav">
+    <li><a href="index.html">Home</a></li>
+
+    <li class="n-ov-drop">
+      <a href="#Our-story.html" class="n-ov-toggle">Who We Are <span class="n-caret">▾</span></a>
+      <ul class="n-ov-submenu">
+        <li><a href="team.html">Team</a></li>
+        <li><a href="#">Partners</a></li>
+        <li><a href="Our-story.html">History</a></li>
+      </ul>
+    </li>
+
+    <li class="#what-we-do" class="n-ov-toggle">What We Do <span class="n-caret">▾</span></a>
+      <ul class="n-ov-submenu">
+        <li><a href="waste-to-value.html">Waste to Value</a></li>
+        <li><a href="street-sanitization.html">Street Sanitization</a></li>
+      </ul>
+    </li>
+
+    <li><a href="volunteer.html" class="active">Volunteer</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+
+  <div class="n-ov-bottom">
+    <a href="donate.html" class="n-ov-donate">♡ &nbsp;Donate</a>
+  </div>
+</div>
+
+<!-- PAGE -->
+<main class="page">
+
+  <div class="page-heading">
+    <h1>Make a Difference</h1>
+    <p>Choose a cause, pick an amount, and support the communities that need it most.</p>
+  </div>
+
+  <div class="donate-card">
+
+    <!-- STEP 1: CAUSE -->
+    <div class="step-label">1 — Choose a Cause</div>
+    <div class="cause-grid">
+      <button class="cause-btn active" data-cause="Youth Empowerment" onclick="selectCause(this)">🎓 Youth Empowerment</button>
+      <button class="cause-btn" data-cause="Community Health" onclick="selectCause(this)">🩺 Community Health</button>
+      <button class="cause-btn" data-cause="Sanitation" onclick="selectCause(this)">🚰 Sanitation</button>
+      <button class="cause-btn" data-cause="Environment" onclick="selectCause(this)">🌿 Environment</button>
+      <button class="cause-btn" data-cause="Waste to Value" onclick="selectCause(this)">♻️ Waste to Value</button>
+      <button class="cause-btn" data-cause="Where Needed Most" onclick="selectCause(this)">❤️ Where Needed Most</button>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- STEP 2: AMOUNT -->
+    <div class="step-label">2 — Choose an Amount (USD)</div>
+    <div class="amount-grid">
+      <button class="amount-btn" data-amount="10" onclick="selectAmount(this)">$10</button>
+      <button class="amount-btn active" data-amount="25" onclick="selectAmount(this)">$25</button>
+      <button class="amount-btn" data-amount="50" onclick="selectAmount(this)">$50</button>
+      <button class="amount-btn" data-amount="100" onclick="selectAmount(this)">$100</button>
+      <button class="amount-btn" data-amount="250" onclick="selectAmount(this)">$250</button>
+      <button class="amount-btn" data-amount="500" onclick="selectAmount(this)">$500</button>
+    </div>
+    <div class="custom-amount-wrap">
+      <span class="currency">$</span>
+      <input type="number" class="custom-input" id="customAmount" placeholder="Or enter custom amount" min="1" oninput="handleCustom(this)">
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="summary visible" id="summary">
+      You're donating <strong id="summaryAmount">$25</strong> to <strong id="summaryCause">Youth Empowerment</strong>. Thank you.
+    </div>
+
+    <div style="height:24px;"></div>
+
+    <!-- STEP 3: PAYPAL -->
+    <div class="step-label">3 — Complete Your Donation</div>
+    <a id="paypalBtn" href="#" class="paypal-btn" onclick="goPayPal(event)">
+      <svg class="paypal-logo" viewBox="0 0 101 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.237 2.138H6.376C5.97 2.138 5.62 2.43 5.556 2.83L3.148 18.04a.672.672 0 0 0 .663.776h2.83a.672.672 0 0 0 .663-.568l.672-4.26a.672.672 0 0 1 .663-.568h1.853c3.862 0 6.09-1.869 6.674-5.572.263-1.62.011-2.893-.74-3.785-.824-.98-2.284-1.525-4.189-1.525zm.676 5.49c-.32 2.1-1.927 2.1-3.482 2.1h-.885l.62-3.928a.403.403 0 0 1 .398-.34h.406c1.058 0 2.057 0 2.573.603.308.36.402.894.37 1.565zM30.17 7.561h-2.84a.403.403 0 0 0-.398.34l-.103.648-.163-.235c-.504-.732-1.627-.977-2.748-.977-2.57 0-4.764 1.947-5.192 4.679-.222 1.363.094 2.664.868 3.573.712.835 1.727 1.182 2.937 1.182 2.072 0 3.222-1.332 3.222-1.332l-.104.644a.672.672 0 0 0 .663.776h2.558a.672.672 0 0 0 .663-.568l1.535-9.722a.672.672 0 0 0-.663-.777l-.035-.01zm-3.959 4.533c-.224 1.326-1.279 2.217-2.623 2.217-.675 0-1.214-.217-1.561-.628-.344-.408-.473-.99-.364-1.636.21-1.314 1.282-2.234 2.604-2.234.66 0 1.196.22 1.549.634.355.418.493 1.003.395 1.647zM46.105 7.561h-2.851a.672.672 0 0 0-.555.293l-3.202 4.716-1.357-4.532a.672.672 0 0 0-.644-.477h-2.801a.403.403 0 0 0-.38.537l2.556 7.5-2.404 3.393a.403.403 0 0 0 .328.636h2.847a.672.672 0 0 0 .553-.288l7.72-11.142a.403.403 0 0 0-.33-.636h-.48z" fill="#fff"/>
+        <path d="M55.1 2.138h-5.861c-.405 0-.756.293-.819.693L46.012 18.04a.672.672 0 0 0 .663.776h3.04a.47.47 0 0 0 .464-.398l.72-4.43a.672.672 0 0 1 .663-.568h1.853c3.862 0 6.09-1.869 6.674-5.572.263-1.62.011-2.893-.74-3.785-.824-.98-2.284-1.525-4.189-1.525l-.06.1zm.675 5.49c-.32 2.1-1.926 2.1-3.482 2.1h-.884l.62-3.928a.403.403 0 0 1 .397-.34h.406c1.059 0 2.057 0 2.574.603.308.36.402.894.37 1.565zM73.033 7.561h-2.84a.403.403 0 0 0-.398.34l-.103.648-.163-.235c-.504-.732-1.627-.977-2.748-.977-2.57 0-4.764 1.947-5.191 4.679-.223 1.363.093 2.664.868 3.573.712.835 1.727 1.182 2.937 1.182 2.072 0 3.222-1.332 3.222-1.332l-.104.644a.672.672 0 0 0 .663.776h2.558a.672.672 0 0 0 .663-.568l1.535-9.722a.672.672 0 0 0-.663-.777l-.035-.01zm-3.96 4.533c-.224 1.326-1.278 2.217-2.622 2.217-.675 0-1.214-.217-1.561-.628-.344-.408-.473-.99-.364-1.636.21-1.314 1.281-2.234 2.604-2.234.66 0 1.196.22 1.548.634.355.418.494 1.003.395 1.647zM76.076 2.494l-2.434 15.546a.672.672 0 0 0 .663.776h2.447a.672.672 0 0 0 .663-.568L79.824 3a.403.403 0 0 0-.398-.477h-2.753a.403.403 0 0 0-.397.34l-.2-.37z" fill="#fff" opacity=".7"/>
+      </svg>
+      Donate Securely with PayPal
+    </a>
+
+    <p class="trust-note">
+      <span class="lock">🔒</span>
+      Secured by PayPal &nbsp;·&nbsp; 100% of your donation reaches the community
+    </p>
+
+  </div>
+
+  <div class="page-footer">
+    <p>Mtaazillas Community-Based Organisation — Registered in Kenya</p>
+    <p style="margin-top:6px;">Questions? <a href="mailto:donate@mtaazillas.org">donate@mtaazillas.org</a></p>
+  </div>
+
+</main>
+
+<script>
+  // State
+  let selectedCause = 'Youth Empowerment';
+  let selectedAmount = 25;
+
+  // Header scroll
+  const header = document.getElementById('siteHeader');
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const cur = window.scrollY;
+    if (cur > 40) {
+      header.classList.add('scrolled');
+      header.classList.toggle('hidden', cur > lastScroll && cur > 100);
+    } else {
+      header.classList.remove('scrolled', 'hidden');
+    }
+    lastScroll = cur;
+  });
+
+  // Cause selection
+  function selectCause(btn) {
+    document.querySelectorAll('.cause-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedCause = btn.dataset.cause;
+    updateSummary();
+  }
+
+  // Amount selection
+  function selectAmount(btn) {
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedAmount = parseFloat(btn.dataset.amount);
+    document.getElementById('customAmount').value = '';
+    updateSummary();
+  }
+
+  // Custom amount
+  function handleCustom(input) {
+    const val = parseFloat(input.value);
+    if (val > 0) {
+      document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+      selectedAmount = val;
+      updateSummary();
+    }
+  }
+
+  // Update summary
+  function updateSummary() {
+    const summary = document.getElementById('summary');
+    const amt = document.getElementById('summaryAmount');
+    const cause = document.getElementById('summaryCause');
+    amt.textContent = '$' + selectedAmount.toLocaleString();
+    cause.textContent = selectedCause;
+    summary.classList.add('visible');
+  }
+
+  // PayPal redirect
+  // Replace YOUR_PAYPAL_EMAIL with the real PayPal business email
+  function goPayPal(e) {
+    e.preventDefault();
+    const email = 'jmmuli681@gmail.com'; // ← replace with real PayPal email
+    const amount = selectedAmount;
+    const item = encodeURIComponent('Mtaazillas Donation – ' + selectedCause);
+    const url = `https://www.paypal.com/donate/?business=${encodeURIComponent(email)}&amount=${amount}&item_name=${item}&currency_code=USD&no_recurring=0`;
+    window.open(url, '_blank');
+  }
+
+  // Init
+  updateSummary();
+</script>
+
+<script src="js/nav.js"></script>
+</body>
+</html>

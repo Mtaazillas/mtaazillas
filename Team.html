@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Meet the Mtaazillas youth movement Board of Directors and leadership.">
+<title>Board Of Directors </title>
+<link rel="stylesheet" href="CSS/styles.css">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ── ROOT TOKENS (Same as index.html) ── */
+:root{
+  --charcoal:#1c1f22;
+  --dark2:#2a2d31;
+  --steel:#8a9199;
+  --silver:#d1d5db;
+  --cream:#f4f1eb;
+  --white:#ffffff;
+  --gold:#d4af37;
+  --gold-deep:#b8922a;
+  --gold-pale:rgba(212,175,55,.12);
+  --green-dark:#176B43;
+  --green-mid:#1F8A57;
+  --green-pale:#DCF2E3;
+  --green-bg:#EFF9F1;
+  --orange:#dab335;
+  --orange-dark:#DD6E0E;
+  --ink:#1C2620;
+  --gray-text:#5C6B62;
+  --line:#E4EAE5;
+  --radius-full:999px;
+  --nav-h:72px;
+  
+  /* Assigned the brand's orange to replicate the vibrant red in the mockup */
+  --card-theme: var(--orange); 
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--white);font-family:'Barlow',sans-serif;overflow-x:hidden;padding-top:var(--nav-h)}
+a{text-decoration:none;color:inherit}
+
+
+
+/* ══════════════════════════════════════════
+   BOARD OF DIRECTORS SECTION
+══════════════════════════════════════════ */
+.board-section {
+  padding: 120px 0 100px;
+  background: var(--white);
+}
+
+.board-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 48px;
+  text-align: center;
+}
+
+/* Eyebrow Kicker — orients visitors as soon as the page loads */
+.board-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: 18px;
+}
+.board-kicker::before,
+.board-kicker::after {
+  content: '';
+  width: 30px;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+.board-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: var(--gray-text);
+  max-width: 620px;
+  margin: 0 auto 56px;
+  line-height: 1.6;
+}
+
+/* Titles & Descriptions */
+.board-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 18px;
+  line-height: 1.1;
+}
+
+.board-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: var(--gray-text);
+  line-height: 1.6;
+  max-width: 900px;
+  margin: 48px auto 0;
+}
+
+/* --- Grid Setup (5 on Desktop → 2 rows of 5 for ten members, down to 2 on Phone) --- */
+.board-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 22px;
+}
+
+/* --- Individual Card Layout --- */
+.dir-card {
+  position: relative;
+  height: 420px;
+  width: 100%;
+  border-radius: 16px;
+  background: var(--charcoal);
+  overflow: hidden;
+  text-align: left;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+.dir-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.18);
+}
+
+/* Cycle the accent color across the ten cards for visual rhythm */
+.dir-card:nth-child(5n+2) { --card-theme: var(--green-mid); }
+.dir-card:nth-child(5n+3) { --card-theme: var(--gold-deep); }
+.dir-card:nth-child(5n+4) { --card-theme: var(--green-dark); }
+.dir-card:nth-child(5n+5) { --card-theme: var(--orange-dark); }
+
+/* Thin top accent bar — the only trace of the brand color left, easy to delete entirely */
+.dir-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: var(--card-theme);
+  z-index: 3;
+}
+
+/* The Person's Image — now fills the full card, cropped from the top down */
+.dir-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 1;
+  transition: transform 0.5s ease;
+}
+.dir-card:hover .dir-img {
+  transform: scale(1.06);
+}
+
+/* Bottom Gradient Fade — dark scrim over the photo so text stays readable */
+.dir-fade {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 55%;
+  background: linear-gradient(to top, rgba(10,12,14,.92) 0%, rgba(10,12,14,.5) 50%, transparent 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Bottom Information (Name, Role, Activities) — overlaid on the photo */
+.dir-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 22px 20px;
+  z-index: 4;
+  color: #fff;
+}
+.dir-name {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+.dir-role {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+  opacity: 0.95;
+}
+.dir-activities {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  opacity: 0.8;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  padding-top: 8px;
+  display: block;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 1180px) {
+  .board-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 700px) {
+  .board-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .board-section { padding: 90px 0 80px; }
+  .board-inner { padding: 0 20px; }
+  
+  .board-title { margin-bottom: 14px; }
+  .board-kicker { font-size: 0.68rem; letter-spacing: 2.5px; margin-bottom: 14px; }
+  .board-kicker::before,
+  .board-kicker::after { width: 20px; }
+  .board-subtitle { font-size: 0.9rem; margin-bottom: 40px; }
+  
+  /* Strictly 2 columns on phone */
+  .board-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  /* Adjust Card height for mobile */
+  .dir-card {
+    height: 300px;
+    border-radius: 14px;
+  }
+
+  .dir-info { padding: 16px; }
+  .dir-name { font-size: 1.05rem; }
+  .dir-role { font-size: 0.7rem; margin-bottom: 6px; }
+  .dir-activities { font-size: 0.65rem; }
+}
+
+/* REVEAL ANIMATION */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     HEADER
+═══════════════════════════════════════ -->
+<header class="n-bar" id="nBar">
+  <div style="display:flex;align-items:center;width:100%;gap:0">
+    <div class="n-logo-icon">
+      <img src="images/logo.png" alt="Mtaazillas Logo" class="logo-img">
+    </div>
+    <nav aria-label="Primary">
+      <ul class="n-links">
+        <li><a href="index.html">Home</a></li>
+
+        <li class="n-drop">
+          <a href="#">Who We Are <span class="n-caret">▾</span></a>
+          <ul class="n-drop-menu">
+            <li><a href="team.html">Team</a></li>
+            <li><a href="#">Partners</a></li>
+            <li><a href="Our-story.html">History</a></li>
+          </ul>
+        </li>
+
+        <li class="n-drop">
+          <a href="#">What We Do <span class="n-caret">▾</span></a>
+          <ul class="n-drop-menu">
+            <li><a href="#waste-to-value.html">Waste to Value</a></li>
+            <li><a href="#treet-sanitization.html">Street Sanitization</a></li>
+          </ul>
+        </li>
+
+        <li><a href="volunteer.html" class="active">Volunteer</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="donate.html" class="n-donate">♡ &nbsp;Donate</a>
+    <button class="n-burger" id="nBurger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════
+     MOBILE FULL-SCREEN OVERLAY
+═══════════════════════════════════════ -->
+<div class="n-overlay" id="nOverlay">
+  <div class="n-ov-top">
+    <img src="images/logo.png" alt="Mtaazillas Logo" class="n-ov-logo">
+    <button class="n-ov-close" id="nOvClose" aria-label="Close menu">✕</button>
+  </div>
+
+  <ul class="n-ov-nav">
+    <li><a href="index.html">Home</a></li>
+
+    <li class="n-ov-drop">
+      <a href="Our-story.html" class="n-ov-toggle">Who We Are <span class="n-caret">▾</span></a>
+      <ul class="n-ov-submenu">
+        <li><a href="team.html">Team</a></li>
+        <li><a href="#">Partners</a></li>
+        <li><a href="Our-story.html">History</a></li>
+      </ul>
+    </li>
+
+    <li class="n-ov-drop">
+      <a href="index.html#what-we-do" class="n-ov-toggle">What We Do <span class="n-caret">▾</span></a>
+      <ul class="n-ov-submenu">
+        <li><a href="#waste-to-value.html">Waste to Value</a></li>
+        <li><a href="#street-sanitization.html">Street Sanitization</a></li>
+      </ul>
+    </li>
+
+    <li><a href="volunteer.html" class="active">Volunteer</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+
+  <div class="n-ov-bottom">
+    <a href="donate.html" class="n-ov-donate">♡ &nbsp;Donate</a>
+  </div>
+</div>
+
+<!-- MOBILE OVERLAY -->
+<div class="n-overlay" id="nOverlay" aria-hidden="true">
+  <div class="n-ov-top">
+    <a href="index.html" class="n-ov-logo" onclick="closeNav()">
+      <div class="n-ov-logo-sq"><svg viewBox="0 0 22 18"><polyline points="1 17 1 1 11 11 21 1 21 17"/></svg></div>
+      <span class="n-ov-logo-name">Mtaazillas</span>
+    </a>
+    <button class="n-ov-close" id="nClose" aria-label="Close menu">✕</button>
+  </div>
+  <ul class="n-ov-nav">
+    <li><a href="index.html" onclick="closeNav()">Home</a></li>
+    <li>
+      <button class="ov-toggle">About Us <svg class="n-ov-chev" viewBox="0 0 10 16"><polyline points="2 2 8 8 2 14"/></svg></button>
+      <ul class="n-ov-sub">
+        <li><a href="Our-story.html" onclick="closeNav()">Our Story</a></li>
+        <li><a href="Team.html" onclick="closeNav()">Our Team</a></li>
+        <li><a href="partners.html" onclick="closeNav()">Partners</a></li>
+      </ul>
+    </li>
+    <li>
+      <button class="ov-toggle">What We Do <svg class="n-ov-chev" viewBox="0 0 10 16"><polyline points="2 2 8 8 2 14"/></svg></button>
+      <ul class="n-ov-sub">
+        <li><a href="health.html" onclick="closeNav()">Health</a></li>
+        <li><a href="sanitation.html" onclick="closeNav()">Sanitation</a></li>
+        <li><a href="youth-empowerment.html" onclick="closeNav()">Youth Empowerment</a></li>
+        <li><a href="waste-management.html" onclick="closeNav()">Waste to Value</a></li>
+        <li><a href="enviromental.html" onclick="closeNav()">Environment</a></li>
+      </ul>
+    </li>
+    <li><a href="volunteer.html" onclick="closeNav()">Volunteers</a></li>
+    <li><a href="contact.html" onclick="closeNav()">Contact</a></li>
+  </ul>
+  <div class="n-ov-bottom">
+    <div class="n-ov-social">
+      <a href="#" aria-label="Instagram">IG</a>
+      <a href="#" aria-label="X / Twitter">X</a>
+      <a href="#" aria-label="Facebook">FB</a>
+      <a href="#" aria-label="YouTube">YT</a>
+    </div>
+    <a href="donate.html" class="n-ov-donate" onclick="closeNav()">♡ &nbsp;Donate</a>
+  </div>
+</div>
+
+<!-- ═══════ BOARD OF DIRECTORS ═══════ -->
+<section class="board-section">
+  <div class="board-inner">
+
+    <span class="board-kicker reveal">The Faces Of Mtaazillas</span>
+    <h1 class="board-title reveal">Guiding The Vision</h1>
+    <p class="board-subtitle reveal">Behind every clean street and healthier neighborhood is a team turning ideas into action — welcome to the people driving Mtaazillas forward, from grassroots health work to waste-to-value innovation.</p>
+
+    <div class="board-grid reveal">
+
+      <!-- Card 1 -->
+      <div class="dir-card">
+        <img src="images/Muli.JPG" alt="James Muli" class="dir-img" >
+        <div class="dir-fade"></div>
+        <div class="dir-info">
+          <h3 class="dir-name">James Muli</h3>
+          <p class="dir-role">Chairperson</p>
+          <span class="dir-activities">Strategy & board leadership</span>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="dir-card">
+        <img src="images/wambo.JPG" alt="Vyonne Wanjiru" class="dir-img" >
+        <div class="dir-fade"></div>
+        <div class="dir-info">
+          <h3 class="dir-name">Vyonne Wanjiru</h3>
+         <p class="dir-role">Accountant</p>
+          <span class="dir-activities">Financial management & bookkeeping</span>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="dir-card">
+        <img src="images/mary.JPG" alt="Mary Waceke" class="dir-img" >
+        <div class="dir-fade"></div>
+        <div class="dir-info">
+          <h3 class="dir-name">Mary Waceke</h3>
+          <p class="dir-role">Secretary</p>
+          <span class="dir-activities">Records & correspondence</span>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="dir-card">
+        <img src="images/wanjiru.JPG" alt="Sarah Wanjiku" class="dir-img" >
+        <div class="dir-fade"></div>
+        <div class="dir-info">
+          <h3 class="dir-name">Sarah Wanjiku</h3>
+         <p class="dir-role">Community Liaison</p>
+          <span class="dir-activities">Outreach & partnerships</span>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="dir-card">
+        <img src="images/otieno.JPG" alt="Abdi Abubakar" class="dir-img" >
+        <div class="dir-fade"></div>
+        <div class="dir-info">
+          <h3 class="dir-name">Abdi Abubakar</h3>
+           <p class="dir-role">Assistant-Community Liaison</p>
+          <span class="dir-activities">Outreach & partnerships</span>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="dir-card">
+        <img src="images/achieng.JPG" alt="Josphat Kimani" class="dir-img">
+        <div class="dir-fade"></div>
+        <div class="dir-info">
+          <h3 class="dir-name">Josphat Kimani</h3>
+          <p class="dir-role">Site Manager</p>
+          <span class="dir-activities">Site operations & safety</span>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="dir-card">
+        <img src="images/kamau.JPG" alt="Ann Njeri" class="dir-img" >
+        <div class="dir-fade"></div>
+        <div class="dir-info">
+          <h3 class="dir-name">Ann Njeri</h3>
+          <p class="dir-role">Youth Empowerment Lead</p>
+          <span class="dir-activities">Mentorship & training programs</span>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="dir-card">
+        <img src="images/nyambura.JPG" alt="Grace Nyambura" class="dir-img" >
+        <div class="dir-fade"></div>
+        <div class="dir-info">
+          <h3 class="dir-name">Wilson Murigi</h3>
+          <p class="dir-role">Environmental Lead</p>
+          <span class="dir-activities">Conservation & tree-planting</span>
+        </div>
+      </div>
+
+      <!-- Card 10 -->
+      <div class="dir-card">
+        <img src="images/atieno.JPG" alt="Mercy Atieno" class="dir-img">
+        <div class="dir-fade"></div>
+        <div class="dir-info">
+          <h3 class="dir-name">Mercy Atieno</h3>
+          <p class="dir-role">Volunteer Coordinator</p>
+          <span class="dir-activities">Community engagement</span>
+        </div>
+      </div>
+
+    </div>
+
+
+
+  </div>
+</section>
+
+<!-- ═══════ SCRIPTS ═══════ -->
+<script>
+/* ── NAV: scroll solid/hide ── */
+const nBar = document.getElementById('nBar');
+let prevY = window.scrollY;
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  /* Always keep it solid for secondary pages, but hide on scroll down */
+  nBar.classList.toggle('hide', y > prevY && y > 120);
+  prevY = y;
+}, { passive: true });
+
+/* ── NAV: mobile open / close ── */
+const nOverlay = document.getElementById('nOverlay');
+const nBurger  = document.getElementById('nBurger');
+const nClose   = document.getElementById('nClose');
+function openNav(){
+  nOverlay.classList.add('open');nOverlay.setAttribute('aria-hidden','false');
+  nBurger.classList.add('open');nBurger.setAttribute('aria-expanded','true');
+  document.body.style.overflow='hidden';
+}
+function closeNav(){
+  nOverlay.classList.remove('open');nOverlay.setAttribute('aria-hidden','true');
+  nBurger.classList.remove('open');nBurger.setAttribute('aria-expanded','false');
+  document.body.style.overflow='';
+}
+nBurger.addEventListener('click', openNav);
+nClose.addEventListener('click', closeNav);
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeNav(); });
+
+/* ── NAV: mobile accordion ── */
+document.querySelectorAll('.ov-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const li = btn.parentElement;
+    const isOpen = li.classList.contains('ov-open');
+    document.querySelectorAll('.n-ov-nav > li.ov-open').forEach(el => el.classList.remove('ov-open'));
+    if (!isOpen) li.classList.add('ov-open');
+  });
+});
+
+/* ── SCROLL REVEAL ── */
+const ro = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if(e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80);
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+</script>
+
+<script src="js/nav.js"></script>
+</body>
+</html>

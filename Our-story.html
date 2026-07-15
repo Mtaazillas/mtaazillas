@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Story</title>
+<link rel="stylesheet" href="css/styles.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@600;700;800&family=Barlow:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+.os-section{
+  --charcoal:#1c1f22;
+  --gold:#d4af37;
+  --gold-deep:#b8922a;
+  --gold-pale:rgba(212,175,55,.14);
+  --green-dark:#176B43;
+  --green-mid:#1F8A57;
+  --green-pale:#DCF2E3;
+  --green-bg:#EFF9F1;
+  --orange:#DD6E0E;
+  --cream:#f4f1eb;
+  --ink:#1C2620;
+  --gray-text:#5C6B62;
+  --line:#E4EAE5;
+  background:var(--cream);
+  font-family:'Inter',sans-serif;
+  color:var(--ink);
+}
+.os-section *{box-sizing:border-box}
+.os-wrap{max-width:1100px;margin:0 auto;padding:0 48px}
+
+/* ── Shared label/heading patterns ── */
+.os-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Barlow',sans-serif;font-weight:700;font-size:.78rem;
+  letter-spacing:3px;text-transform:uppercase;color:var(--gold-deep);
+  margin-bottom:14px;
+}
+.os-eyebrow::before{content:'';width:26px;height:2px;background:var(--gold);border-radius:2px}
+.os-h2{
+  font-family:'Poppins',sans-serif;font-weight:700;
+  font-size:clamp(1.7rem,3.4vw,2.4rem);line-height:1.15;
+  color:var(--ink);margin-bottom:16px;
+}
+.os-h2 em{font-style:normal;color:var(--green-mid)}
+.os-lede{font-size:1rem;color:var(--gray-text);line-height:1.7;max-width:560px}
+
+/* ══════════════════════════════════
+   HERO — full photo, "image on top"
+══════════════════════════════════ */
+.os-hero{
+  position:relative;
+   padding-top: 110px;
+  height:min(78vh, 620px);
+  min-height:420px;
+  display:flex;align-items:flex-end;
+  overflow:hidden;
+}
+.os-hero-img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center 35%;
+}
+.os-hero-scrim{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(20,22,20,.25) 0%, rgba(18,20,18,.55) 55%, rgba(15,17,15,.92) 100%);
+}
+.os-hero-content{position:relative;z-index:2;width:100%;padding:0 48px 56px;color:#fff}
+.os-hero-kicker{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Barlow',sans-serif;font-weight:700;font-size:.78rem;
+  letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;
+}
+.os-hero-kicker::before{content:'';width:26px;height:2px;background:var(--gold)}
+.os-hero h1{
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,8vw,5.5rem);
+  letter-spacing:1px;line-height:.95;margin-bottom:14px;
+}
+.os-hero-sub{font-size:1.05rem;font-weight:400;color:rgba(255,255,255,.82);max-width:520px;line-height:1.6}
+
+/* ══════════════════════════════════
+   WHO WE ARE — split, with founder avatars
+══════════════════════════════════ */
+.os-who{padding:88px 0 70px}
+.os-split{display:grid;grid-template-columns:240px 1fr;gap:56px;align-items:center}
+.os-avatars{display:flex;flex-direction:column;align-items:center;gap:18px}
+.os-avatar-stack{display:flex}
+.os-avatar-stack img{
+  width:64px;height:64px;border-radius:50%;object-fit:cover;
+  border:4px solid var(--cream);box-shadow:0 2px 8px rgba(0,0,0,.1);
+  margin-left:-16px;
+}
+.os-avatar-stack img:first-child{margin-left:0}
+.os-avatar-more{
+  width:64px;height:64px;border-radius:50%;background:var(--charcoal);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-family:'Barlow',sans-serif;
+  font-size:.78rem;font-weight:700;border:4px solid var(--cream);margin-left:-16px;
+}
+.os-avatar-label{font-family:'Barlow',sans-serif;font-size:.74rem;font-weight:600;
+  letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-text);text-align:center}
+.os-who-text p{font-size:.98rem;color:var(--gray-text);line-height:1.75;margin-bottom:14px}
+.os-who-text p:last-child{margin-bottom:0}
+.os-who-text strong{color:var(--ink)}
+
+/* ══════════════════════════════════
+   TIMELINE
+══════════════════════════════════ */
+.os-timeline-wrap{padding:60px 0 80px;border-top:1px solid var(--line)}
+.os-timeline-head{text-align:center;margin-bottom:48px}
+.os-timeline-head .os-eyebrow{justify-content:center;display:flex}
+.os-timeline-head .os-h2{text-align:center}
+.os-timeline{max-width:680px;margin:0 auto}
+.os-t-item{display:grid;grid-template-columns:88px 28px 1fr;gap:0 18px;padding-bottom:34px}
+.os-t-item:last-child{padding-bottom:0}
+.os-t-date{font-family:'Barlow',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.2px;
+  text-transform:uppercase;color:var(--gray-text);text-align:right;padding-top:4px;line-height:1.4}
+.os-t-track{display:flex;flex-direction:column;align-items:center}
+.os-t-node{width:13px;height:13px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:5px;box-shadow:0 0 0 4px var(--gold-pale)}
+.os-t-item:nth-child(2) .os-t-node{background:var(--green-mid);box-shadow:0 0 0 4px var(--green-pale)}
+.os-t-item:nth-child(3) .os-t-node{background:var(--orange);box-shadow:0 0 0 4px rgba(221,110,14,.15)}
+.os-t-item:nth-child(4) .os-t-node{background:#fff;border:2px dashed var(--line);box-shadow:none}
+.os-t-stem{flex:1;width:2px;background:var(--line);min-height:30px;margin-top:6px}
+.os-t-item:last-child .os-t-stem{display:none}
+.os-t-title{font-family:'Poppins',sans-serif;font-weight:700;font-size:1.02rem;color:var(--ink);margin-bottom:5px}
+.os-t-text{font-size:.88rem;color:var(--gray-text);line-height:1.65}
+
+/* ══════════════════════════════════
+   MISSION & VISION — photo + color overlay cards
+══════════════════════════════════ */
+.os-mv{padding:0 0 90px}
+.os-mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.os-mv-card{
+  position:relative;min-height:340px;border-radius:18px;overflow:hidden;
+  display:flex;align-items:flex-end;padding:36px 32px;
+  transition:transform .35s ease,box-shadow .35s ease;cursor:default;
+}
+.os-mv-card:hover{transform:translateY(-6px);box-shadow:0 24px 44px rgba(0,0,0,.18)}
+.os-mv-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.os-mv-tint{position:absolute;inset:0;z-index:1}
+.os-mv-mission .os-mv-tint{background:linear-gradient(180deg, rgba(184,146,42,.25) 0%, rgba(28,31,34,.88) 92%)}
+.os-mv-vision .os-mv-tint{background:linear-gradient(180deg, rgba(23,107,67,.3) 0%, rgba(28,31,34,.88) 92%)}
+.os-mv-body{position:relative;z-index:2;color:#fff}
+.os-mv-tag{font-family:'Barlow',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:2.5px;
+  text-transform:uppercase;opacity:.85;margin-bottom:8px;display:block}
+.os-mv-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:.5px;margin-bottom:10px;line-height:1.05}
+.os-mv-card p{font-size:.88rem;line-height:1.65;color:rgba(255,255,255,.88);max-width:38ch}
+
+/* ══════════════════════════════════
+   IMPACT — five pillars
+══════════════════════════════════ */
+.os-impact{padding:0 0 90px}
+.os-impact-head{text-align:center;max-width:600px;margin:0 auto 44px}
+.os-impact-head .os-eyebrow{justify-content:center;display:flex}
+.os-impact-head .os-h2{text-align:center}
+.os-impact-head .os-lede{max-width:none;text-align:center;margin:0 auto}
+.os-impact-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.os-impact-card{
+  background:#fff;border:1px solid var(--line);border-radius:14px;
+  padding:26px 18px;text-align:left;border-top:4px solid var(--gold);
+  transition:transform .3s ease,box-shadow .3s ease;
+}
+.os-impact-card:hover{transform:translateY(-5px);box-shadow:0 14px 28px rgba(0,0,0,.08)}
+.os-impact-card:nth-child(2){border-top-color:var(--green-mid)}
+.os-impact-card:nth-child(3){border-top-color:var(--orange)}
+.os-impact-card:nth-child(4){border-top-color:var(--green-dark)}
+.os-impact-card:nth-child(5){border-top-color:var(--gold-deep)}
+.os-impact-icon{width:34px;height:34px;margin-bottom:14px;stroke:var(--ink);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.os-impact-card h4{font-family:'Poppins',sans-serif;font-weight:700;font-size:.92rem;margin-bottom:8px;color:var(--ink)}
+.os-impact-card p{font-size:.78rem;color:var(--gray-text);line-height:1.55}
+
+/* ══════════════════════════════════
+   FUTURE / LOOKING AHEAD
+══════════════════════════════════ */
+.os-future{padding:0 0 90px}
+.os-future-inner{
+  background:var(--charcoal);border-radius:22px;padding:56px;
+  display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;
+  color:#fff;
+}
+.os-future .os-eyebrow{color:var(--gold)}
+.os-future .os-eyebrow::before{background:var(--gold)}
+.os-future-inner .os-h2{color:#fff}
+.os-future-inner p.os-lede{color:rgba(255,255,255,.7);max-width:480px}
+.os-future-list{list-style:none;margin:26px 0 30px;padding:0;display:flex;flex-direction:column;gap:14px}
+.os-future-list li{display:flex;align-items:flex-start;gap:12px;font-size:.92rem;color:rgba(255,255,255,.88);line-height:1.5}
+.os-future-list svg{width:18px;height:18px;flex-shrink:0;margin-top:3px;stroke:var(--gold);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.os-future-cta{
+  display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:var(--gold);
+  color:var(--charcoal);font-family:'Barlow',sans-serif;font-weight:700;font-size:.8rem;
+  letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;border-radius:5px;
+  transition:background .25s,transform .2s;
+}
+.os-future-cta:hover{background:#fff;transform:translateY(-2px)}
+.os-future-stats{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.os-future-stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:20px}
+.os-future-stat b{display:block;font-family:'Bebas Neue',sans-serif;font-size:2.1rem;color:var(--gold);line-height:1}
+.os-future-stat span{font-family:'Barlow',sans-serif;font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.65)}
+
+/* ══════════════════════════════════
+   VALUES
+══════════════════════════════════ */
+.os-values{padding:0 0 80px}
+.os-values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.os-value{background:#fff;border:1px solid var(--line);border-radius:14px;padding:30px 24px;text-align:center}
+.os-value-icon{
+  width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  margin:0 auto 16px;
+}
+.os-value:nth-child(1) .os-value-icon{background:var(--gold-pale)}
+.os-value:nth-child(2) .os-value-icon{background:var(--green-pale)}
+.os-value:nth-child(3) .os-value-icon{background:rgba(221,110,14,.12)}
+.os-value-icon svg{width:24px;height:24px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.os-value:nth-child(1) .os-value-icon svg{stroke:var(--gold-deep)}
+.os-value:nth-child(2) .os-value-icon svg{stroke:var(--green-dark)}
+.os-value:nth-child(3) .os-value-icon svg{stroke:var(--orange)}
+.os-value h4{font-family:'Poppins',sans-serif;font-weight:700;font-size:1rem;margin-bottom:8px}
+.os-value p{font-size:.84rem;color:var(--gray-text);line-height:1.6}
+
+/* ══════════════════════════════════
+   CLOSING QUOTE
+══════════════════════════════════ */
+.os-closing{padding:0 0 100px}
+.os-closing-card{
+  max-width:640px;margin:0 auto;text-align:center;background:#fff;
+  border:1px solid var(--line);border-radius:18px;padding:44px 40px;
+}
+.os-closing-avatar{width:56px;height:56px;border-radius:50%;object-fit:cover;margin:0 auto 18px;border:3px solid var(--cream);box-shadow:0 2px 10px rgba(0,0,0,.08)}
+.os-closing-card p{font-family:'Poppins',sans-serif;font-weight:400;font-size:1.08rem;font-style:italic;color:var(--ink);line-height:1.65;margin-bottom:14px}
+.os-closing-name{font-family:'Barlow',sans-serif;font-size:.74rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-text)}
+
+/* ══════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════ */
+@media (max-width:980px){
+  .os-wrap,.os-hero-content{padding-left:28px;padding-right:28px}
+  .os-impact-grid{grid-template-columns:repeat(3,1fr)}
+  .os-future-inner{grid-template-columns:1fr;padding:40px 28px}
+  .os-future-stats{grid-template-columns:1fr 1fr;max-width:360px}
+}
+@media (max-width:760px){
+  .os-split{grid-template-columns:1fr;gap:24px;text-align:center}
+  .os-avatars{flex-direction:row;justify-content:center}
+  .os-mv-grid{grid-template-columns:1fr}
+  .os-values-grid{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .os-wrap,.os-hero-content{padding-left:20px;padding-right:20px}
+  .os-hero{height:auto;min-height:420px;padding-top:80px}
+  .os-impact-grid{grid-template-columns:1fr 1fr}
+  .os-t-item{grid-template-columns:64px 22px 1fr;gap:0 12px}
+  .os-future-stats{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     HEADER
+═══════════════════════════════════════ -->
+<header class="n-bar" id="nBar">
+  <div style="display:flex;align-items:center;width:100%;gap:0">
+    <div class="n-logo-icon">
+      <img src="images/logo.png" alt="Mtaazillas Logo" class="logo-img">
+    </div>
+    <nav aria-label="Primary">
+      <ul class="n-links">
+        <li><a href="index.html">Home</a></li>
+
+        <li class="n-drop">
+          <a href="Our-story.html">Who We Are <span class="n-caret">▾</span></a>
+          <ul class="n-drop-menu">
+            <li><a href="team.html">Team</a></li>
+            <li><a href="#">Partners</a></li>
+            <li><a href="Our-story.html">History</a></li>
+          </ul>
+        </li>
+
+        <li class="n-drop">
+          <a href="index.html#what-we-do">What We Do <span class="n-caret">▾</span></a>
+          <ul class="n-drop-menu">
+            <li><a href="waste-to-value.html">Waste to Value</a></li>
+            <li><a href="street-sanitization.html">Street Sanitization</a></li>
+          </ul>
+        </li>
+
+        <li><a href="volunteer.html" class="active">Volunteer</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="donate.html" class="n-donate">♡ &nbsp;Donate</a>
+    <button class="n-burger" id="nBurger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════
+     MOBILE FULL-SCREEN OVERLAY
+═══════════════════════════════════════ -->
+<div class="n-overlay" id="nOverlay">
+  <div class="n-ov-top">
+    <img src="images/logo.png" alt="Mtaazillas Logo" class="n-ov-logo">
+    <button class="n-ov-close" id="nOvClose" aria-label="Close menu">✕</button>
+  </div>
+
+  <ul class="n-ov-nav">
+    <li><a href="index.html">Home</a></li>
+
+    <li class="n-ov-drop">
+      <a href="#" class="n-ov-toggle">Who We Are <span class="n-caret">▾</span></a>
+      <ul class="n-ov-submenu">
+        <li><a href="team.html">Team</a></li>
+        <li><a href="#">Partners</a></li>
+        <li><a href="Our-story.html">History</a></li>
+      </ul>
+    </li>
+
+    <li class="n-ov-drop">
+      <a href="#" class="n-ov-toggle">What We Do <span class="n-caret">▾</span></a>
+      <ul class="n-ov-submenu">
+        <li><a href="waste-to-value.html">Waste to Value</a></li>
+        <li><a href="street-sanitization.html">Street Sanitization</a></li>
+      </ul>
+    </li>
+
+    <li><a href="volunteer.html" class="active">Volunteer</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+
+  <div class="n-ov-bottom">
+    <a href="donate.html" class="n-ov-donate">♡ &nbsp;Donate</a>
+  </div>
+</div>
+
+<!-- MOBILE OVERLAY -->
+<div class="n-overlay" id="nOverlay" aria-hidden="true">
+  <div class="n-ov-top">
+    <span class="n-ov-logo-name">Mtaazillas</span>
+    <button class="n-ov-close" id="nClose" aria-label="Close menu">✕</button>
+  </div>
+  <ul class="n-ov-nav">
+    <li><a href="#" onclick="closeNav()">Who We Are</a></li>
+    <li><a href="#" onclick="closeNav()">What We Do</a></li>
+    <li><a href="volunteer.html" class="active" onclick="closeNav()">Volunteer</a></li>
+    <li><a href="contact.html" onclick="closeNav()">Contact</a></li>
+  </ul>
+  <div class="n-ov-bottom">
+    <a href="donate.html" class="n-ov-donate" onclick="closeNav()">♡ &nbsp;Donate Now</a>
+  </div>
+</div>
+
+
+<section class="os-section">
+
+  <!-- ═══ HERO — full image, "image on top" ═══ -->
+  <div class="os-hero">
+    <img class="os-hero-img"
+         src="images/banner2.JPG"
+         alt="Nairobi skyline">
+    <div class="os-hero-scrim"></div>
+    <div class="os-hero-content">
+      <span class="os-hero-kicker">Who We Are</span>
+      <h1>Our Story</h1>
+      <p class="os-hero-sub">A youth movement born around one table in Nairobi — and we're just getting started.</p>
+    </div>
+  </div>
+
+  <div class="os-wrap">
+
+    <!-- ═══ WHO WE ARE ═══ -->
+    <div class="os-who">
+      <div class="os-split">
+        <div class="os-avatars">
+          <div class="os-avatar-stack">
+            <img src="images/Muli.JPG" alt="James Muli" onerror="this.src='https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=200&q=80&auto=format&fit=crop&crop=faces'">
+            <img src="images/wambo.JPG" alt="Vyonne Wanjiru" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&q=80&auto=format&fit=crop&crop=faces'">
+            <img src="images/mary.JPG" alt="Mary Waceke" onerror="this.src='https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=200&q=80&auto=format&fit=crop&crop=faces'">
+            <span class="os-avatar-more">+9</span>
+          </div>
+          <span class="os-avatar-label">12 Founding Members</span>
+        </div>
+        <div class="os-who-text">
+          <span class="os-eyebrow">How It Began</span>
+          <h2 class="os-h2">We Are <em>Mtaazillas</em></h2>
+          <p>It started as an idea — a simple question of how we could transform the way we live, beginning with cleaning up our own streets and teaching workshops to those around us.</p>
+       <p>By <strong>mid-2025</strong>, that idea had grown into something real: a project, tested and carried out on the ground in Viwandani.</p>
+   <p>By <strong>mid-2026</strong>, we realized this couldn't stay a single project — it needed to become something bigger. We brought together creative minds ready to build collective impact, and Mtaazillas stopped being a project. It became a movement.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ TIMELINE ═══ -->
+    <div class="os-timeline-wrap">
+      <div class="os-timeline-head">
+        <span class="os-eyebrow">Our Journey</span>
+        <h2 class="os-h2">From One Table To A Movement</h2>
+      </div>
+      <div class="os-timeline">
+
+        <div class="os-t-item">
+          <div class="os-t-date">The Idea</div>
+          <div class="os-t-track"><div class="os-t-node"></div><div class="os-t-stem"></div></div>
+          <div>
+            <div class="os-t-title">A conversation that became a calling</div>
+            <p class="os-t-text">A small gathering — twelve people, one table, and a shared frustration about challenges no one else seemed to be addressing. That evening, something shifted.</p>
+          </div>
+        </div>
+
+        <div class="os-t-item">
+          <div class="os-t-date">The Plan<br>2025</div>
+          <div class="os-t-track"><div class="os-t-node"></div><div class="os-t-stem"></div></div>
+          <div>
+            <div class="os-t-title">From idea to intention</div>
+            <p class="os-t-text">We mapped out what our community truly needed — health, sanitation, youth empowerment, waste-to-value, and environment — and chose to build something owned by all of us.</p>
+          </div>
+        </div>
+
+        <div class="os-t-item">
+          <div class="os-t-date">June<br>2026</div>
+          <div class="os-t-track"><div class="os-t-node"></div><div class="os-t-stem"></div></div>
+          <div>
+            <div class="os-t-title">Month one begins</div>
+            <p class="os-t-text">We officially formed, assigned roles, launched our first programmes, and started keeping records. Twelve members, five pillars, one shared purpose.</p>
+          </div>
+        </div>
+
+        <div class="os-t-item">
+          <div class="os-t-date">Ahead</div>
+          <div class="os-t-track"><div class="os-t-node"></div></div>
+          <div>
+            <div class="os-t-title">What we're building toward</div>
+            <p class="os-t-text">Registration, growth, sustainable programmes, and a community that trusts us. We're in the early days — and we intend to make them count.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══ MISSION & VISION ═══ -->
+    <div class="os-mv">
+      <div class="os-mv-grid">
+        <div class="os-mv-card os-mv-mission">
+          <img class="os-mv-img" src="images/17.JPG" alt="Community volunteers">
+          <div class="os-mv-tint"></div>
+          <div class="os-mv-body">
+            <span class="os-mv-tag">Our Mission</span>
+            <h3>To Mobilise &amp; Empower</h3>
+            <p>To empower the youth and residents of Viwandani and Nairobi's underserved neighbourhoods to transform their own communities — through street sanitation, waste-to-value enterprise, health outreach, and grassroots leadership — building solutions that belong to the people who live them.</p>
+          </div>
+        </div>
+        <div class="os-mv-card os-mv-vision">
+          <img class="os-mv-img" src="images/11.JPG" alt="Nairobi skyline">
+          <div class="os-mv-tint"></div>
+          <div class="os-mv-body">
+            <span class="os-mv-tag">Our Vision</span>
+            <h3>A Thriving, Dignified Nairobi</h3>
+            <p>A Nairobi where every neighbourhood is clean, healthy, and self-driven — where young people turn waste into opportunity, community members lead their own change, and no problem closest to home is left for someone else to solve.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ IMPACT ═══ -->
+    <div class="os-impact">
+      <div class="os-impact-head">
+        <span class="os-eyebrow">Where We're Headed</span>
+        <h2 class="os-h2">The Impact We're Working Toward</h2>
+        <p class="os-lede">We're one month in. Here's the change we're building toward across our five pillars.</p>
+      </div>
+      <div class="os-impact-grid">
+
+        <div class="os-impact-card">
+          <svg class="os-impact-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
+          <h4>Health</h4>
+          <p>Connecting youth to clinics, screenings &amp; wellness education in every neighbourhood we reach.</p>
+        </div>
+
+        <div class="os-impact-card">
+          <svg class="os-impact-icon" viewBox="0 0 24 24"><path d="M12 3s6 7 6 11a6 6 0 1 1-12 0c0-4 6-11 6-11Z"/></svg>
+          <h4>Sanitation</h4>
+          <p>Cleaner streets and dignified, accessible waste collection for informal settlements.</p>
+        </div>
+
+        <div class="os-impact-card">
+          <svg class="os-impact-icon" viewBox="0 0 24 24"><path d="M12 2l2.4 6.3L21 11l-6.6 2.7L12 20l-2.4-6.3L3 11l6.6-2.7L12 2Z"/></svg>
+          <h4>Youth Empowerment</h4>
+          <p>Mentorship, skills training &amp; leadership pathways for young people ready to lead.</p>
+        </div>
+
+        <div class="os-impact-card">
+          <svg class="os-impact-icon" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5M20 12a8 8 0 0 1-14 5"/><path d="M16 4l2 3-3 1M8 20l-2-3 3-1"/></svg>
+          <h4>Waste To Value</h4>
+          <p>Turning waste into income — upcycling and recycling initiatives owned by the community.</p>
+        </div>
+
+        <div class="os-impact-card">
+          <svg class="os-impact-icon" viewBox="0 0 24 24"><path d="M12 22v-6"/><path d="M8 13a4 4 0 1 1 8 0c0 2-2 3-4 3s-4-1-4-3Z"/><path d="M9.5 9a2.5 2.5 0 1 1 5 0c0 1.3-1.2 2.2-2.5 2.2S9.5 10.3 9.5 9Z"/></svg>
+          <h4>Environment</h4>
+          <p>Tree-planting and clean-ups that help Nairobi's neighbourhoods breathe easier.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══ LOOKING AHEAD ═══ -->
+    <div class="os-future">
+      <div class="os-future-inner">
+        <div>
+          <span class="os-eyebrow">Looking Ahead</span>
+          <h2 class="os-h2">What We're Bringing To Nairobi Next</h2>
+          <p class="os-lede">We're early — and intentional about it. Here's what we're working toward over the next chapter.</p>
+          <ul class="os-future-list">
+            <li><svg viewBox="0 0 24 24"><polyline points="4 13 9 18 20 6"/></svg> Formal registration &amp; transparent governance structures</li>
+            <li><svg viewBox="0 0 24 24"><polyline points="4 13 9 18 20 6"/></svg> Scaling our six pillars into more Nairobi neighbourhoods</li>
+            <li><svg viewBox="0 0 24 24"><polyline points="4 13 9 18 20 6"/></svg> Partnerships with local businesses, donors &amp; institutions</li>
+            <li><svg viewBox="0 0 24 24"><polyline points="4 13 9 18 20 6"/></svg> Growing from 10 founders into a movement of hundreds</li>
+          </ul>
+          <a href="index.html#volunteers" class="os-future-cta">Join The Movement →</a>
+        </div>
+        <div class="os-future-stats">
+          <div class="os-future-stat"><b>10</b><span>Founding Members</span></div>
+          <div class="os-future-stat"><b>6</b><span>Community Pillars</span></div>
+          <div class="os-future-stat"><b>2026</b><span>Year We Began</span></div>
+          <div class="os-future-stat"><b>1</b><span>Shared Purpose</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ VALUES ═══ -->
+    <div class="os-values">
+      <div class="os-values-grid">
+        <div class="os-value">
+          <div class="os-value-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 2.5-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.3"/><path d="M15.2 20c.3-2 1.8-3.4 3.8-3.7"/></svg></div>
+          <h4>Community First</h4>
+          <p>Every decision starts with what our people need most.</p>
+        </div>
+        <div class="os-value">
+          <div class="os-value-icon"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <h4>Transparency</h4>
+          <p>Open records, honest reporting, nothing hidden.</p>
+        </div>
+        <div class="os-value">
+          <div class="os-value-icon"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9C1 8 2 4 6 4c2 0 3.5 1.3 4 2.2.5-.9 2-2.2 4-2.2 4 0 5 4 3.5 8C19 16.5 12 21 12 21Z"/></svg></div>
+          <h4>Dignity</h4>
+          <p>Every member and every person we serve deserves respect.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ CLOSING QUOTE ═══ -->
+    <div class="os-closing">
+      <div class="os-closing-card">
+        <img class="os-closing-avatar" src="images/Muli.JPG" alt="James Muli"
+             onerror="this.src='https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=200&q=80&auto=format&fit=crop&crop=faces'">
+        <p>"We did not wait for someone else to come. We looked around the table and realised — we are the ones we were waiting for."</p>
+        <div class="os-closing-name">James Muli &nbsp;·&nbsp; Chairperson</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script src="js/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Mtaazillas is a Nairobi youth movement fighting for cleaner streets, healthier communities, and an empowered generation.">
+<title>Mtaazillas</title>
+
+<!-- Included original fonts + Inter & Poppins -->
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ── ROOT TOKENS ── */
+:root{
+  --charcoal:#1c1f22;
+  --dark2:#2a2d31;
+  --steel:#8a9199;
+  --silver:#d1d5db;
+  --cream:#f4f1eb;
+  --white:#ffffff;
+  --gold:#dab335;
+  --gold-deep:#b8922a;
+  --gold-pale:#d4af371f;
+  --green-dark:#d4af37;
+  --green-mid:#030303;
+  --green-pale:#DCF2E3;
+  --green-bg:#EFF9F1;
+  --orange:#F4811E;
+  --orange-dark:#DD6E0E;
+  --ink:#1C2620;
+  --gray-text:#5C6B62;
+  --line:#E4EAE5;
+  --radius-full:999px;
+  --nav-h:72px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#fff;font-family:'Barlow',sans-serif;overflow-x:hidden;padding-top:var(--nav-h)}
+
+a{text-decoration:none;color:inherit}
+
+/* ── CONTAINER ── */
+.container{max-width:1240px;margin:0 auto;padding:0 48px}
+@media(max-width:600px){.container{padding:0 20px}}
+
+/* TYPOGRAPHY HELPERS */
+.section-tag{font-family:'Barlow',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--steel);margin-bottom:12px;display:block}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.6rem,4.5vw,4rem);line-height:.95;color:var(--charcoal);letter-spacing:1px}
+.section-title.light{color:var(--cream)}
+.section-body{font-family:'Crimson Pro',serif;font-size:1.12rem;line-height:1.8;color:#444}
+.section-body.light{color:var(--silver)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:none}
+/* ══════════════════════════════════════════
+   HEADER — transparent at top, solid on scroll
+══════════════════════════════════════════ */
+.n-bar{
+  position:fixed;inset:0 0 auto 0;z-index:9000;
+  height:auto;
+  min-height:110px;
+  display:flex;align-items:center;
+  padding:26px 56px;
+  background:transparent;
+  border-bottom:1px solid transparent;
+  box-shadow:none;
+  transition:transform .4s ease, background .35s ease, box-shadow .35s ease, border-color .35s ease;
+  will-change:transform;
+}
+.n-bar.n-solid{
+  background:rgba(255,255,255,.98);
+  border-bottom:1px solid rgba(28,31,34,.08);
+  box-shadow:0 1px 32px rgba(28,31,34,.07);
+}
+.n-bar.n-hide{
+  transform:translateY(-100%);
+}
+
+.n-logo-icon{
+  display:flex;
+  align-items:center;
+  flex-shrink:0;
+  margin-right:auto;
+}
+.logo-img{
+  height:64px;
+  width:auto;
+  max-width:220px;
+  object-fit:contain;
+  display:block;
+}
+
+
+nav[aria-label="Primary"]{
+  display:flex;
+  align-items:center;
+}
+
+.n-links{display:flex;align-items:center;list-style:none;margin:0 32px 0 0}
+.n-links > li{position:relative}
+.n-links > li > a{
+  display:inline-flex;align-items:center;gap:4px;padding:10px 15px;
+  font-family:'Barlow',sans-serif;font-size:.78rem;font-weight:500;
+  letter-spacing:1.8px;text-transform:uppercase;text-decoration:none;
+  border-radius:4px;transition:color .2s,background .2s;
+  color:#fff;
+}
+.n-bar.n-solid .n-links > li > a{ color:#3a3a3a; }
+.n-links > li > a:hover,.n-links > li > a.active{ background:var(--nav-hover-bg); }
+.n-bar.n-solid .n-links > li > a:hover,
+.n-bar.n-solid .n-links > li > a.active{ color:var(--charcoal); }
+.n-links > li > a.active{ color:var(--accent) !important; }
+.n-caret{font-size:.65rem;transition:transform .2s;display:inline-block}
+
+/* ---- Desktop dropdown ---- */
+.n-drop-menu{
+  position:absolute;top:100%;left:0;
+  min-width:220px;
+  background:#fff;
+  border:1px solid rgba(28,31,34,.08);
+  border-radius:8px;
+  box-shadow:0 12px 32px rgba(28,31,34,.14);
+  list-style:none;margin:0;padding:8px;
+  opacity:0;visibility:hidden;transform:translateY(8px);
+  transition:opacity .2s ease,transform .2s ease,visibility .2s;
+  z-index:9001;
+}
+.n-drop::before{
+  content:"";position:absolute;top:100%;left:0;right:0;height:14px;
+}
+.n-drop:hover .n-drop-menu,
+.n-drop:focus-within .n-drop-menu{
+  opacity:1;visibility:visible;transform:translateY(0);
+}
+.n-drop:hover .n-caret{transform:rotate(180deg)}
+.n-drop-menu li a{
+  display:block;padding:11px 16px;border-radius:5px;
+  font-family:'Barlow',sans-serif;font-size:.76rem;font-weight:500;
+  letter-spacing:1.2px;text-transform:uppercase;color:#3a3a3a;
+  text-decoration:none;transition:background .18s,color .18s;
+}
+.n-drop-menu li a:hover{background:var(--nav-hover-bg);color:var(--accent)}
+
+.n-donate{
+  display:inline-flex;align-items:center;gap:8px;padding:11px 26px;
+  background:var(--accent);color:var(--charcoal);
+  font-family:'Barlow',sans-serif;font-size:.76rem;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;text-decoration:none;
+  border-radius:5px;border:2px solid var(--accent);
+  transition:background .25s,color .25s,border-color .25s,transform .2s,box-shadow .2s;
+}
+.n-donate:hover{
+  background:var(--accent-dark);border-color:var(--accent-dark);color:#fff;
+  transform:translateY(-2px);box-shadow:0 8px 24px rgba(212,175,55,.45);
+}
+
+.n-burger{
+  display:none;flex-direction:column;gap:5px;width:40px;height:40px;
+  align-items:center;justify-content:center;background:none;border:none;
+  cursor:pointer;padding:0;margin-left:16px;
+}
+.n-burger span{
+  display:block;width:24px;height:1.8px;background:#fff;border-radius:2px;
+  transition:transform .32s,opacity .22s,width .22s,background .35s;transform-origin:center;
+}
+.n-bar.n-solid .n-burger span{ background:var(--charcoal); }
+.n-burger.open span:nth-child(1){transform:translateY(6.8px) rotate(45deg)}
+.n-burger.open span:nth-child(2){opacity:0;width:0}
+.n-burger.open span:nth-child(3){transform:translateY(-6.8px) rotate(-45deg)}
+
+/* ══════════════════════════════════════════
+   MOBILE FULL-SCREEN OVERLAY
+══════════════════════════════════════════ */
+.n-overlay{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--charcoal);
+  display:flex;flex-direction:column;align-items:center;
+  transform:translateX(100%);
+  transition:transform .42s cubic-bezier(.77,0,.175,1);
+  overflow-y:auto;
+}
+.n-overlay.open{transform:translateX(0)}
+
+.n-ov-top{
+  width:100%;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  padding:24px 28px 8px;
+  flex-shrink:0;
+}
+.n-ov-logo-img{
+  height:32px;
+  width:auto;
+  max-width:120px;
+  object-fit:contain;
+  display:block;
+}
+.n-ov-close{
+  position:absolute;top:20px;right:20px;
+  width:38px;height:38px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:rgba(244,241,235,.8);font-size:.95rem;
+  z-index:2;
+}
+
+.n-ov-nav{
+  list-style:none;padding:20px 0;margin:0;
+  flex:1;width:100%;
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;
+}
+.n-ov-nav > li{width:100%}
+.n-ov-nav > li > a{
+  display:block;padding:18px 30px;
+  font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:2.5px;
+  color:rgba(244,241,235,.88);text-decoration:none;
+  transition:color .2s;
+}
+.n-ov-nav > li > a:hover,.n-ov-nav > li > a.active{color:var(--accent)}
+
+.n-ov-drop{position:relative}
+.n-ov-submenu{
+  list-style:none;margin:0;padding:0;
+  max-height:0;overflow:hidden;
+  transition:max-height .35s ease;
+}
+.n-ov-drop.open .n-ov-submenu{max-height:300px}
+.n-ov-submenu li a{
+  display:block;padding:12px 30px;
+  font-family:'Barlow',sans-serif;font-size:1rem;font-weight:500;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:rgba(244,241,235,.65);text-decoration:none;
+}
+.n-ov-submenu li a:hover{color:var(--accent)}
+.n-ov-toggle .n-caret{transition:transform .3s}
+.n-ov-drop.open .n-ov-toggle .n-caret{transform:rotate(180deg)}
+
+.n-ov-bottom{padding:20px 30px 44px;width:100%;display:flex;justify-content:center}
+.n-ov-donate{
+  display:flex;align-items:center;justify-content:center;
+  padding:18px 40px;background:var(--accent);color:var(--charcoal);
+  font-family:'Barlow',sans-serif;font-size:.82rem;font-weight:700;
+  letter-spacing:3px;text-transform:uppercase;text-decoration:none;border-radius:5px;
+}
+
+@media(max-width:960px){
+  .n-bar{padding:20px 28px}
+  .n-links,.n-donate{display:none}
+  .n-burger{display:flex}
+}
+
+/* ══════════════════════════════════════════
+   HERO
+══════════════════════════════════════════ */
+.hero{
+  position:relative;height:100vh;min-height:700px;
+  margin-top:calc(-1 * var(--nav-h));
+  background-color:var(--charcoal);
+  background-image:url('images/banner.jpg');
+  background-size:cover;background-position:center;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:0 20px;
+}
+.hero::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(28,31,34,.35) 0%,rgba(28,31,34,.82) 100%);
+  z-index:1;
+}
+.hero-content{position:relative;z-index:2;max-width:900px}
+.hero-label{
+  font-family:'Barlow',sans-serif;font-size:.85rem;font-weight:600;
+  letter-spacing:4px;color:var(--gold);display:block;margin-bottom:24px;
+}
+.hero h1{
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,8vw,7rem);
+  color:var(--white);line-height:.95;margin-bottom:24px;letter-spacing:2px;
+}
+.hero p{
+  font-family:'Crimson Pro',serif;font-size:clamp(1.1rem,2vw,1.35rem);
+  color:var(--cream);max-width:700px;margin:0 auto 40px;
+  line-height:1.65;font-style:italic;
+}
+.hero-buttons{display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
+.btn-hero-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--gold);color:var(--charcoal);
+  padding:15px 32px;border-radius:4px;
+  font-family:'Barlow',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  transition:background .25s,transform .2s;
+}
+.btn-hero-primary:hover{background:var(--gold-deep);transform:translateY(-3px)}
+.btn-hero-outline{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1.5px solid rgba(255,255,255,.55);color:#fff;
+  padding:15px 32px;border-radius:4px;
+  font-family:'Barlow',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  transition:background .25s,border-color .25s;
+}
+
+/* ══════════════════════════════════════════
+   MISSION SECTION (Grid & Image Fixes)
+══════════════════════════════════════════ */
+.mission{background:#fff;padding:80px 0 72px}
+.mission-inner{max-width:1240px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1.05fr 0.95fr;gap:64px;align-items:stretch}
+
+.mission-text-part {display:flex; flex-direction:column; justify-content:center;}
+.mission p{color:#555;font-family:'Crimson Pro',serif;font-size:1.08rem;line-height:1.8;max-width:520px;margin:0 0 14px}
+
+/* Feature cards */
+.feature-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
+.f-card{
+  background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 18px;
+}
+.f-card-icon{
+  width:38px;height:38px;border-radius:50%;background:var(--green-pale);
+  display:flex;align-items:center;justify-content:center;margin-bottom:12px;
+}
+.f-card-icon svg{width:16px;height:16px;stroke:var(--green-dark);fill:none;stroke-width:2}
+.f-card h3{font-family:'Barlow',sans-serif;font-size:14px;font-weight:700;margin:0 0 6px;color:var(--charcoal)}
+.f-card p{font-size:12.5px;color:var(--gray-text);line-height:1.55;margin:0}
+
+/* Mission art — THE IMAGE FIX */
+.mission-art{
+  position:relative;
+  border-radius:20px;
+  overflow:hidden;
+  background:#f0f0f0;
+  width: 100%;
+  height: 100%;
+  min-height: 500px; /* Ensures it looks big on the grid */
+}
+.m-slide{
+  position:absolute;inset:0;opacity:0;transition:opacity .9s ease;
+}
+.m-slide.active{opacity:1}
+.m-slide img{
+  width:100%;
+  height:100%;
+  object-fit:cover; /* This makes the image fill the box without distortion */
+  display:block;
+}
+.m-slide-caption{
+  position:absolute;bottom:30px;left:30px;color:#fff;
+  font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:1px;
+  background:rgba(0,0,0,0.3);padding:4px 12px;border-radius:4px;backdrop-filter:blur(4px);
+}
+
+.m-stats{margin-top:32px}
+.m-since{font-size:12px;color:var(--steel);margin-bottom:10px;font-family:'Barlow',sans-serif;letter-spacing:1px;text-transform:uppercase}
+.stat-row{display:flex;gap:40px;flex-wrap:wrap}
+.stat-num{font-size:26px;font-weight:800;color:var(--green-dark);font-family:'Bebas Neue',sans-serif;letter-spacing:1px}
+
+.m-cta-row{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.btn-green{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--green-dark);color:#fff;padding:14px 26px;border-radius:var(--radius-full);
+  font-family:'Barlow',sans-serif;font-weight:600;font-size:.82rem;letter-spacing:1.5px;text-transform:uppercase;
+}
+.btn-outline-dark{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#fff;border:1.5px solid #ddd;color:var(--charcoal);padding:14px 26px;border-radius:var(--radius-full);
+  font-family:'Barlow',sans-serif;font-weight:600;font-size:.82rem;letter-spacing:1.5px;text-transform:uppercase;
+}
+
+.slide-dots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:10}
+.slide-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.5);border:none;cursor:pointer;padding:0;transition:all .3s}
+.slide-dot.active{background:#fff;width:18px;border-radius:4px}
+
+@media(max-width:900px){
+  .mission-inner{grid-template-columns:1fr}
+  .mission-art{min-height:400px; margin-top:32px}
+}
+
+/* ══════════════════════════════════════════
+   UPCOMING EXPERIENCES
+══════════════════════════════════════════ */
+.experiences { padding: 72px 0 80px; text-align: center; background: var(--white); font-family: 'Inter', sans-serif; }
+.experiences .exp-container { max-width: 740px; margin: 0 auto; padding: 0 24px; }
+.experiences h2 { font-family: 'Poppins', sans-serif; font-size: 30px; font-weight: 700; position: relative; display: inline-block; margin-bottom: 26px; color: var(--ink); }
+.experiences h2::after { content: ""; position: absolute; left: 50%; bottom: -10px; transform: translateX(-50%); width: 64px; height: 3px; background: var(--orange); border-radius: 2px; }
+.experiences > .exp-container > p { color: var(--gray-text); font-size: 15.5px; line-height: 1.7; margin: 0 0 36px; }
+
+.loading-card { background: var(--green-bg); border-radius: 18px; padding: 36px 32px; max-width: 460px; margin: 0 auto; }
+.loading-card h3 { font-family: 'Poppins', sans-serif; font-size: 19px; font-weight: 700; color: var(--green-dark); margin-bottom: 10px; }
+.loading-card p { color: var(--gray-text); font-size: 14px; line-height: 1.6; margin: 0 0 20px; }
+.btn-orange { display: inline-block; background: var(--orange); color: #fff; padding: 12px 22px; border-radius: var(--radius-full); font-weight: 600; font-size: 14px; transition: background .15s; text-decoration: none; font-family: 'Inter', sans-serif; margin-bottom: 16px; }
+.btn-orange:hover { background: var(--orange-dark); }
+
+/* UI/UX Link Style */
+.ui-ux-link { 
+  display: block; 
+  font-size: 11px; 
+  color: var(--steel); 
+  text-transform: uppercase; 
+  letter-spacing: 2px; 
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+.ui-ux-link:hover { color: var(--orange); text-decoration: underline; }
+
+/* ══════════════════════════════════════════
+   WHAT WE DO
+══════════════════════════════════════════ */
+.what-section{background:var(--charcoal);padding:100px 0;overflow:hidden}
+.what-inner{max-width:1240px;margin:0 auto;padding:0 48px}
+.what-header{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:64px}
+
+.pillars-track{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.pillar{
+  position:relative;height:280px;border-radius:12px;overflow:hidden;
+  cursor:pointer;
+  background:linear-gradient(145deg,var(--dark2),#232628);
+  border:1px solid rgba(255,255,255,.05);
+  transition:transform .35s;
+}
+.pillar:hover{transform:translateY(-8px)}
+.pillar-body{position:relative;z-index:1;padding:28px 22px;height:100%;display:flex;flex-direction:column}
+.pillar-emoji{font-size:2.4rem;margin-bottom:auto}
+.pillar-name{
+  font-family:'Bebas Neue',sans-serif;font-size:1.25rem;color:var(--cream);
+  letter-spacing:1.5px;line-height:1.1;margin-top:16px;
+}
+.pillar-text{font-size:.82rem;color:var(--steel);line-height:1.6;margin-top:8px}
+
+/* ══════════════════════════════════════════
+   VOLUNTEERS
+══════════════════════════════════════════ */
+.volunteers-section{background:#fff;padding:100px 0}
+.vol-inner{max-width:1240px;margin:0 auto;padding:0 48px}
+.vol-header{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:48px}
+.volunteers-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.volunteers-grid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;transition:transform .3s}
+.volunteers-grid img:hover{transform:scale(1.04);z-index:2;position:relative}
+
+</style>
+</head>
+<body>
+<!-- NAV -->
+<header class="n-bar" id="nBar">
+  <div style="display:flex;align-items:center;width:100%;gap:0">
+    <div class="n-logo-icon">
+      <img src="images/homepage logo.png" alt="Mtaazillas Logo" class="logo-img">
+    </div>
+
+    <nav aria-label="Primary">
+      <ul class="n-links">
+        <li><a href="index.html">Home</a></li>
+        <li class="n-drop">
+          <a href="Our-story.html">Who We Are <span class="n-caret">▾</span></a>
+          <ul class="n-drop-menu">
+            <li><a href="Team.html">Our Team</a></li>
+            <li><a href="Our-story.html">Our Story</a></li>
+            <li><a href="#">Partners</a></li>
+          </ul>
+        </li>
+        <li class="n-drop">
+          <a href="index.html#what-we-do">What We Do <span class="n-caret">▾</span></a>
+          <ul class="n-drop-menu">
+            <li><a href="health.html">Health</a></li>
+            <li><a href="sanitation.html">Sanitation</a></li>
+            <li><a href="youth-empowerment.html">Youth Empowerment</a></li>
+          </ul>
+        </li>
+        <li><a href="volunteer.html">Volunteers</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <a href="donate.html" class="n-donate">♡ &nbsp;Donate</a>
+    <button class="n-burger" id="nBurger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- MOBILE OVERLAY -->
+<div class="n-overlay" id="nOverlay">
+  <div class="n-ov-top">
+    <img src="images/logo.png" alt="Mtaazillas Logo" class="n-ov-logo-img">
+    <button class="n-ov-close" id="nOvClose" aria-label="Close menu">✕</button>
+  </div>
+
+  <ul class="n-ov-nav">
+    <li><a href="index.html">Home</a></li>
+
+    <li class="n-ov-drop">
+      <a href="Our-story.html" class="n-ov-toggle">Who We Are <span class="n-caret">▾</span></a>
+      <ul class="n-ov-submenu">
+        <li><a href="Team.html">Our Team</a></li>
+        <li><a href="Our-story.html">Our Story</a></li>
+        <li><a href="partners.html">Partners</a></li>
+      </ul>
+    </li>
+
+    <li class="n-ov-drop">
+      <a href="index.html#what-we-do" class="n-ov-toggle">What We Do <span class="n-caret">▾</span></a>
+      <ul class="n-ov-submenu">
+        <li><a href="health.html">Health</a></li>
+        <li><a href="sanitation.html">Sanitation</a></li>
+        <li><a href="youth-empowerment.html">Youth Empowerment</a></li>
+      </ul>
+    </li>
+
+    <li><a href="volunteer.html">Volunteers</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+
+  <div class="n-ov-bottom">
+    <a href="donate.html" class="n-ov-donate">♡ &nbsp;Donate</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero" id="home">
+  <div class="hero-content">
+    <span class="hero-label">EST. NAIROBI · KENYA</span>
+    <h1>We Are the Mtaazillas.</h1>
+    <p>A movement built on discipline, community, and the warrior spirit of a generation.</p>
+    <div class="hero-buttons">
+      <a href="volunteer.html" class="btn-hero-primary">Join the Movement</a>
+      <a href="Our-story.html" class="btn-hero-outline">Learn Our Story</a>
+    </div>
+  </div>
+</header>
+
+<!-- MISSION SECTION -->
+<section class="mission" id="mission">
+  <div class="mission-inner">
+    <div class="mission-text-part reveal">
+      <p>Mtaazillas started as a grassroots idea: what if caring for the planet felt less like a chore and more like a party? We bring together music, community, and hands-on restoration.</p>
+ 
+      <div class="feature-cards">
+        <div class="f-card">
+          <div class="f-card-icon"><svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M6 7l1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13"/></svg></div>
+          <h3>Cleanups</h3>
+          <p>River and forest restoration soundtracked by music.</p>
+        </div>
+        <div class="f-card">
+          <div class="f-card-icon"><svg viewBox="0 0 24 24"><path d="M9 18V5l11-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm11-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg></div>
+          <h3>Culture</h3>
+          <p>Outdoor jam sessions and hands-on workshops.</p>
+        </div>
+        <div class="f-card">
+          <div class="f-card-icon"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+          <h3>Community</h3>
+          <p>Show up as yourself — everyone's welcome.</p>
+        </div>
+      </div>
+ 
+      <div class="m-stats">
+        <div class="m-since">Since December 2024</div>
+        <div class="stat-row">
+          <div><div class="stat-num">441+</div><div class="stat-label">People joined</div></div>
+          <div><div class="stat-num">3,045kg+</div><div class="stat-label">Waste cleared</div></div>
+        </div>
+      </div>
+ 
+      <div class="m-cta-row">
+        <a href="#experiences" class="btn-green">Join next experience</a>
+        <a href="stories.html" class="btn-outline-dark">Read stories</a>
+      </div>
+    </div>
+ 
+    <!-- AUTO-ROTATING IMAGE PANEL (Fits grid, fills size) -->
+    <div class="mission-art reveal">
+      <div class="m-slide active">
+        <img src="images/11.JPG" alt="Gathering">
+        <div class="m-slide-caption">Forest-floor dance gathering</div>
+      </div>
+      <div class="m-slide">
+        <img src="images/12.JPG" alt="Cleanup">
+        <div class="m-slide-caption">River cleanup day</div>
+      </div>
+      <div class="m-slide">
+        <img src="images/16.JPG" alt="Workshop">
+        <div class="m-slide-caption">Community workshop</div>
+      </div>
+ 
+      <div class="slide-dots" id="slideDots">
+        <button class="slide-dot active" data-idx="0"></button>
+        <button class="slide-dot" data-idx="1"></button>
+        <button class="slide-dot" data-idx="2"></button>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+
+<!-- UPCOMING EXPERIENCES (With UI/UX Link) -->
+<section class="experiences reveal" id="experiences">
+  <div class="exp-container">
+    <h2>Join Our Next Clean-Up</h2>
+    <p>Here's your next opportunity to clean up, give back, and reconnect with your neighborhood. Join the movement below.</p>
+
+    <div class="loading-card">
+      <h3>2026 Loading…</h3>
+      <p>Join our community channel and be the first to know about our next clean-up.</p>
+      
+      <!-- WhatsApp Button -->
+      <a href="https://wa.me/254712345678" class="btn-orange">Join WhatsApp Community</a>
+      
+    </div>
+
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="what-section" id="what-we-do">
+  <div class="what-inner">
+    <div class="what-header reveal">
+      <div>
+        <p class="section-tag">What We Do</p>
+        <h2 class="section-title light">Five Pillars.<br>One Mission.</h2>
+      </div>
+    </div>
+    <div class="pillars-track reveal">
+      <a href="enviromental.html" class="pillar">
+        <div class="pillar-body">
+          <div class="pillar-emoji">🌿</div>
+          <div class="pillar-name">Environmental Conservation</div>
+          <p class="pillar-text">Protecting Nairobi's green spaces and ecosystems.</p>
+        </div>
+      </a>
+      <a href="health.html" class="pillar">
+        <div class="pillar-body">
+          <div class="pillar-emoji">🏥</div>
+          <div class="pillar-name">Health</div>
+          <p class="pillar-text">Awareness and education in our neighborhoods.</p>
+        </div>
+      </a>
+      <a href="sanitation.html" class="pillar">
+        <div class="pillar-body">
+          <div class="pillar-emoji">🧹</div>
+          <div class="pillar-name">Street Sanitation</div>
+          <p class="pillar-text">Transforming how communities look and feel.</p>
+        </div>
+      </a>
+      <a href="youth-empowerment.html" class="pillar">
+        <div class="pillar-body">
+          <div class="pillar-emoji">✊</div>
+          <div class="pillar-name">Youth Empowerment</div>
+          <p class="pillar-text">Skills and mentorship for young leaders.</p>
+        </div>
+      </a>
+      <a href="waste-management.html" class="pillar">
+        <div class="pillar-body">
+          <div class="pillar-emoji">♻️</div>
+          <div class="pillar-name">Waste to Value</div>
+          <p class="pillar-text">Upcycling and economic opportunity.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- VOLUNTEERS -->
+<section class="volunteers-section" id="volunteers">
+  <div class="vol-inner">
+    <div class="vol-header reveal">
+      <div>
+        <p class="section-tag">Our Volunteers</p>
+        <h2 class="section-title">The Hands<br>Behind Everything.</h2>
+      </div>
+    </div>
+    <div class="volunteers-grid reveal">
+      <img src="images/14.JPG" alt="Volunteers">
+      <img src="images/15.JPG" alt="Clean-up">
+      <img src="images/16.JPG" alt="Community">
+      <img src="images/17.JPG" alt="Youth">
+    </div>
+  </div>
+</section>
+
+<script>
+// ══════════════════════════════════════════
+// HEADER: transparent-at-top / solid-on-scroll / hide-on-scroll-down
+// ══════════════════════════════════════════
+const header = document.getElementById('nBar');
+let lastScrollY = window.scrollY;
+
+window.addEventListener('scroll', () => {
+  const currentScrollY = window.scrollY;
+
+  if (currentScrollY <= 10) {
+    header.classList.remove('n-solid');
+  } else {
+    header.classList.add('n-solid');
+  }
+
+  if (currentScrollY > lastScrollY && currentScrollY > 80) {
+    header.classList.add('n-hide');
+  } else {
+    header.classList.remove('n-hide');
+  }
+
+  lastScrollY = currentScrollY;
+});
+
+// ══════════════════════════════════════════
+// MOBILE MENU: burger open/close
+// ══════════════════════════════════════════
+const nBurger  = document.getElementById('nBurger');
+const nOverlay = document.getElementById('nOverlay');
+const nOvClose = document.getElementById('nOvClose');
+
+function openOverlay(){
+  nOverlay.classList.add('open');
+  nBurger.classList.add('open');
+  nBurger.setAttribute('aria-expanded','true');
+  document.body.style.overflow = 'hidden';
+}
+function closeOverlay(){
+  nOverlay.classList.remove('open');
+  nBurger.classList.remove('open');
+  nBurger.setAttribute('aria-expanded','false');
+  document.body.style.overflow = '';
+}
+
+nBurger.addEventListener('click', () => {
+  nOverlay.classList.contains('open') ? closeOverlay() : openOverlay();
+});
+nOvClose.addEventListener('click', closeOverlay);
+
+// ══════════════════════════════════════════
+// MOBILE MENU: accordion dropdowns (Who We Are / What We Do)
+// ══════════════════════════════════════════
+document.querySelectorAll('.n-ov-toggle').forEach(toggle => {
+  toggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    const parent = toggle.closest('.n-ov-drop');
+    const wasOpen = parent.classList.contains('open');
+    document.querySelectorAll('.n-ov-drop').forEach(d => d.classList.remove('open'));
+    if (!wasOpen) parent.classList.add('open');
+  });
+});
+
+/* SCROLL REVEAL */
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+/* AUTO-SLIDE */
+const slides = document.querySelectorAll('.m-slide');
+const dots   = document.querySelectorAll('.slide-dot');
+let current  = 0;
+function goToSlide(idx) {
+  slides[current].classList.remove('active');
+  dots[current].classList.remove('active');
+  current = idx;
+  slides[current].classList.add('active');
+  dots[current].classList.add('active');
+}
+setInterval(() => goToSlide((current + 1) % slides.length), 5000);
+dots.forEach(dot => {
+  dot.addEventListener('click', () => goToSlide(parseInt(dot.dataset.idx)));
+});
+</script>
+
+</body>
+</html>
